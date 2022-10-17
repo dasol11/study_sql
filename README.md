@@ -2,12 +2,49 @@
 
 
 FROM : 특정 테이블을 호출하는 함수
-SELECT : 특정 열을 가져오겠다
-
+SELECT : 특정 컬럼을 가져오겠다
+- AS : 특정 컬럼의 이름을 변경하여 호출
 EX)
 SELECT * FROM Customers;
-Customers 테이블의 모든(*) 열을 가져오겠다
+EX2)
+SELECT
+  CustomerId AS ID,
+  CustomerName AS "이름",
+  Address AS ADDR
+FROM Customers;
+### 한글은 "문자열"
+
+WHERE  : 구문 뒤에 조건을 붙여 원하는 데이터만 가져옴
+
+EX)
+SELECT * FROM Orders
+WHERE EmployeeID = 3;
 
 
+ORDER BY : 특정 구문을 사용해서 특정 컬럼을 기준으로 데이터를 정렬
+- ASC : 오름차순
+- DESC : 내림차순
 
-WHERE  == 조건문
+
+EX)
+SELECT * FROM OrderDetails
+ORDER BY ProductID ASC, Quantity DESC;
+먼저 ProductID를 오름차순으로 정렬 후,
+ProductID가 같은 행에서는 Quantity는 내림차순으로 정렬
+
+LIMIT : 원하는 만큼만 데이터를 가져옴
+LIMIT {가져올 갯수} 또는 LIMIT {건너뛸 갯수}, {가져올 갯수}
+가져올 갯수가 디폴트 0이라고 생각하면 될듯
+
+EX)
+SELECT * FROM Customers
+LIMIT 10;
+EX2)
+SELECT * FROM Customers
+LIMIT 30, 10;
+30개의 열을 건너뛰고 10개를 가져온다
+
+
+# 연산자
+
+

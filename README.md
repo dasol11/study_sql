@@ -7,8 +7,8 @@ SELECT : 특정 컬럼을 가져오겠다
  
 ## EX)
 '''
+//'''
 SELECT * FROM Customers
-'''
 ## EX2)
 SELECT
   CustomerId AS ID,

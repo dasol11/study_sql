@@ -97,3 +97,25 @@ FROM Products;
 Products에서 Price를 가져오고,
 Price 값을 /2해서 HalfPrice로 
 1. 참/거짓 관련 연산자
+
+|TRUE|FALSE|
+|---|---|
+|1|0|
+
+~~~Ini
+SELECT * FROM Customers WHERE FLASE;
+~~~
+
+|연산자|의미|
+|---|---|
+|IS| 양쪽 모두 TRUE 또는 FALSE|
+|IS NOT| 양쪽 모두 TRUE 또는 FALSE|
+
+~~~Ini
+SELECT (TRUE IS FALSE) IS NOT TRUE;
+~~~
+
+|연산자|의미|
+|---|---|
+|AND, &&|양쪽이 모두 TRUE일 때만 TRUE|
+|OR, $|||한쪽은 TRUE이면 TRUE|

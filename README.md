@@ -6,9 +6,9 @@ SELECT : 특정 컬럼을 가져오겠다
 - AS : 특정 컬럼의 이름을 변경하여 호출
  
 ## EX)
-'''
-//'''
+'''Ini
 SELECT * FROM Customers
+'''
 ## EX2)
 SELECT
   CustomerId AS ID,

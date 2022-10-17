@@ -43,7 +43,7 @@ LIMIT 10;
 EX2)
 SELECT * FROM Customers
 LIMIT 30, 10;
-30개의 열을 건너뛰고 10개를 가져온다
+- 30개의 열을 건너뛰고 10개를 가져온다
 
 
 # 연산자

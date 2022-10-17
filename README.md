@@ -118,4 +118,4 @@ SELECT (TRUE IS FALSE) IS NOT TRUE;
 |연산자|의미|
 |---|---|
 |AND, &&|양쪽이 모두 TRUE일 때만 TRUE|
-|OR, $|||한쪽은 TRUE이면 TRUE|
+|OR,| |한쪽은 TRUE이면 TRUE|

@@ -5,9 +5,11 @@ FROM : 특정 테이블을 호출하는 함수
 SELECT : 특정 컬럼을 가져오겠다
 - AS : 특정 컬럼의 이름을 변경하여 호출
  
-# EX)
+## EX)
+///
 SELECT * FROM Customers
-# EX2)
+///
+## EX2)
 SELECT
   CustomerId AS ID,
   CustomerName AS "이름",
@@ -17,7 +19,7 @@ FROM Customers
 
 WHERE  : 구문 뒤에 조건을 붙여 원하는 데이터만 가져옴
 
-# EX)
+## EX)
 SELECT * FROM Orders
 WHERE EmployeeID = 3;
 

@@ -1,7 +1,7 @@
 # study_sql
 
 
-##FROM
+## FROM
 FROM : 특정 테이블을 호출하는 함수
 ## SELECT
 SELECT : 특정 컬럼을 가져오겠다
@@ -58,6 +58,9 @@ LIMIT 30, 10
 
 # 연산자
 ## 1. 사칙연산
+|연산자|의미|
+|+,-,*,/ |더하기, 빼기, 곱하기, 나누기|
+|%, MOD| 나머지|
 ~~~Ini
 SELECT 5 - 2.5 AS DIFFERENCE;
 ~~~
@@ -67,11 +70,27 @@ SELECT 5 - 2.5 AS DIFFERENCE;
 SELECT 'ABC' + 3
 result = 3
 ~~~
-- 문자열 안에 숫자가 있고 숫자랑 연산시 자동으로 숫자로 변환
+문자열 안에 숫자가 있고 숫자랑 연산시 자동으로 숫자로 변환
 ~~~Ini
 SELECT '1' + '002' * 3
 result = 7
 ~~~
+~~~Ini
+SELECT OrderID,ProductID, 
+OrderID + ProductID AS SumVal
 
+FROM OrderDetails  ;
+~~~
+OrderDetails에서 OrderID, ProductID를 불러오고,
+(OrderID+ProductID)한 결과를 SumVal이라는 컬럼으로 가져오겠다
 
-
+~~~Ini
+SELECT
+  ProductName,
+  Price,
+  Price / 2 AS HalfPrice
+  Price
+FROM Products;
+~~~
+Products에서 Price를 가져오고,
+Price 값을 /2해서 HalfPrice로 

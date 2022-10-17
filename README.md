@@ -1,15 +1,15 @@
 # study_sql
 
 
-FROM : 특정 테이블을 호출하는 함수
-SELECT : 특정 컬럼을 가져오겠다
+## FROM : 특정 테이블을 호출하는 함수
+## SELECT : 특정 컬럼을 가져오겠다
 - AS : 특정 컬럼의 이름을 변경하여 호출
  
-## Ex)
+- Ex)
 ~~~Ini
 SELECT * FROM Customers;
 ~~~
-## Ex)
+- Ex)
 ~~~Ini
 SELECT
   CustomerId AS ID,

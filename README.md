@@ -4,6 +4,7 @@
 FROM : 특정 테이블을 호출하는 함수
 SELECT : 특정 컬럼을 가져오겠다
 - AS : 특정 컬럼의 이름을 변경하여 호출
+- 
 EX)
 SELECT * FROM Customers;
 EX2)
@@ -12,7 +13,7 @@ SELECT
   CustomerName AS "이름",
   Address AS ADDR
 FROM Customers;
-### 한글은 "문자열"
+한글은 "문자열"
 
 WHERE  : 구문 뒤에 조건을 붙여 원하는 데이터만 가져옴
 
@@ -46,5 +47,20 @@ LIMIT 30, 10;
 
 
 # 연산자
+# 1. 사칙연산
+Ex)
+SELECT 5 - 2.5 AS DIFFERENCE;
+
+연산시 문자열이 있는 경우 0 으로 취급
+
+EX)
+SELECT 'ABC' + 3;
+result = 3
+- 문자열 안에 숫자가 있고 숫자랑 연산시 자동으로 숫자로 변환
+EX)
+SELECT '1' + '002' * 3;
+result = 7
+
+
 
 

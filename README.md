@@ -118,4 +118,51 @@ SELECT (TRUE IS FALSE) IS NOT TRUE;
 |연산자|의미|
 |---|---|
 |AND, &&|양쪽이 모두 TRUE일 때만 TRUE|
-|OR,\|\| |한쪽은 TRUE이면 TRUE|
+|OR, \|\||한쪽은 TRUE이면 TRUE|
+
+~~~Ini
+SELECT * FROM OrderDetails
+WHERE
+  ProductId = 20
+  AND (OrderId = 10514 OR Quantity = 50);
+~~~
+
+OrderDetails 전체 중에서 ProductId 값이 20이고 OrderId = 10514이거나  Quantity = 50 인 데이터를 가져옴
+
+
+
+|연산자|의미|
+|---|---|
+|=|양쪽 값이 같음|
+|!=,<>|양쪽 값이 다름|
+|>,<| (왼쪽, 오른쪽)값이 더 큼|
+|>=, <=| (왼쪽, 오른쪽) 값이 같거나 더 큼|
+
+~~~Ini
+SELECT 'A' = 'A', 'A' = 'B', 'A' < 'B', 'A' > 'B';
+~~~
+문자열에서는 인덱스를 기준으로 크다고 표현한
+즉, A<B 의 결관는 참(1)
+
+|연산자|의미|
+|---|---|
+|BETWEEN {MIN} AND {MAX}|두 값 사이에 있음|
+|NOT BETWEEN {MIN} AND {MAX}|두 값 사이가 아닌 곳에 있음|
+
+~~~Ini
+SELECT 5 BETWEEN 1 AND 10;
+~~~
+
+~~~Ini
+SELECT 'banana' NOT BETWEEN 'Apple' AND 'camera';
+~~~
+문자열에도 동일하게 적용됨
+
+
+
+~~~Ini
+SELECT * FROM OrderDetails
+WHERE ProductID BETWEEN 1 AND 4;
+~~~
+조거문에서 활용가능함
+

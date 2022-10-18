@@ -1,6 +1,8 @@
 # study_sql
 
-
+<details>
+<summary> SELECT 기초 </summary>
+<div markdown="1">
 ## FROM
 FROM : 특정 테이블을 호출하는 함수
 ## SELECT
@@ -54,8 +56,13 @@ SELECT * FROM Customers
 LIMIT 30, 10
 ~~~
 30개의 열을 건너뛰고 10개를 가져온다
+</div>
+</details>
 
 
+<details>
+<summary> 연산자 </summary>
+<div markdown="1">
 # 연산자
 1. 사칙연산
 
@@ -196,8 +203,13 @@ LIMIT 30, 10
   WHERE City Like '%d'
   ~~~
   City의 값이 'd'로 끝나는 데이터 호출
+</div>
+</details>
 
-
+  
+<details>
+<summary> 함수 </summary>
+<div markdown="1">
 
 # 함수
 1. 숫자와 문자열을 다루는 함수들
@@ -397,10 +409,15 @@ LIMIT 30, 10
     '01' = '1',
   CONVERT('01', DECIMAL) = CONVERT('1', DECIMAL);
   ~~~
+</div>
+</details>
 
 <details>
 <summary> 3. 시간/날짜 관련 및 기타 함수들 </summary>
 <div markdown="1">
 
+  
+</div>
+</details>
 
 

@@ -371,30 +371,29 @@ LIMIT 30, 10
   FROM Products;
   ~~~
   
-
-  |함수|의미|
-  |...|...|
-  |REPLACE(S, A, B)| S중 A를 B로 변경|
-  |INSTR(S,s)| S증 s의 첫 위치 반환 , 없으면 0|
-  |CAST(A, T)| A를 T자료형으로 변환|
+|함수|의미|
+|...|...|
+|REPLACE(S, A, B)| S중 A를 B로 변경|
+|INSTR(S,s)| S증 s의 첫 위치 반환 , 없으면 0|
+|CAST(A, T)| A를 T자료형으로 변환|
   
-  ~~~Ini
-  REPLACE(S, A, B)	
-  ~~~
-  ~~~Ini
-  SELECT
-  INSTR('ABCDE', 'ABC'),
-  INSTR('ABCDE', 'BCDE'),
-  INSTR('ABCDE', 'C'),
-  INSTR('ABCDE', 'DE'),
-  INSTR('ABCDE', 'F');
-  ~~~  
-  ~~~Ini
-  SELECT
+~~~Ini
+REPLACE(S, A, B)	
+~~~
+~~~Ini
+SELECT
+INSTR('ABCDE', 'ABC'),
+INSTR('ABCDE', 'BCDE'),
+INSTR('ABCDE', 'C'),
+INSTR('ABCDE', 'DE'),
+INSTR('ABCDE', 'F');
+~~~  
+~~~Ini
+SELECT
   '01' = '1',
-  CONVERT('01', DECIMAL) = CONVERT('1', DECIMAL);
-  ~~~
+CONVERT('01', DECIMAL) = CONVERT('1', DECIMAL);
+~~~
 
 
-1. 시간/날짜 관련 및 기타 함수들
+3. 시간/날짜 관련 및 기타 함수들
  

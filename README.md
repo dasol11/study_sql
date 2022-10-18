@@ -398,5 +398,9 @@ LIMIT 30, 10
   CONVERT('01', DECIMAL) = CONVERT('1', DECIMAL);
   ~~~
 
-3. 시간/날짜 관련 및 기타 함수들
+<details>
+<summary> 3. 시간/날짜 관련 및 기타 함수들 </summary>
+<div markdown="1">
+
+
 

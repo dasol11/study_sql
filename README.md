@@ -330,14 +330,6 @@ LIMIT 30, 10
   |LEFT|왼쪽부터 N 글자 자름|
   |RIGHT|오른쪽분터 N 글자 자름|
 
-  ~~~Ini
-  SELECT
-    OrderDate,
-    LEFT(OrderDate, 4) AS Year,
-    SUBSTR(OrderDate, 6, 2) AS Month,
-    RIGHT(OrderDate, 2) AS Day
-  FROM Orders;
-  ~~~
   
   
   같은 문자열
@@ -371,7 +363,6 @@ LIMIT 30, 10
     CONCAT('|', LTRIM(' HELLO '), '|'),
     CONCAT('|', RTRIM(' HELLO '), '|'),
     CONCAT('|', TRIM(' HELLO '), '|');
-  
   ~~~
   
 
@@ -386,7 +377,7 @@ LIMIT 30, 10
   SELECT
     LPAD(SupplierID, 5, 0),
     RPAD(Price, 6, 0)
-    FROM Products;
+  FROM Products;
   ~~~
   
 

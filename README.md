@@ -530,14 +530,83 @@ LIMIT 30, 10
       DATEDIFF(LAST_DAY(OrderDate), OrderDate)
     FROM Orders;
     ~~~
-    OrderDate
-    OrderDate 달의 마지막 날짜
+    OrderDate,
+    OrderDate 달의 마지막 일,
+    OrderDate의 주어진 일,
+    OrderDate의 마지막 일과 OrderDate의 주어진 일 차이 반환
     
-    OrderDate의 마지막날짜와 OrderDate의 차이
+    |함수|의미|
+    |---|---|
+    |DATE_FORMAT|시간/날짜를 지정한 형식으로 반환|
+    
+    ~~~Ini
+    SELECT REPLACE(
+      REPLACE(
+        DATE_FORMAT(NOW(), '%Y년 %m월 %d일 %p %h시 %i분 %초'),
+        'AM', '오전'
+      ),
+      'PM', '오후'
+    )
+    
+    ~~~
+    현재 시간을 ''안에 지정된 형식으로 반환 후,
+    'AM'은 오전,'PM'은 오후로 반환
+    
+    |함수|의미|
+    |---|---| 
+    |STR_TO_DATE(S, F)|S를 F형식으로 해석하여 시간/날짜 생성|
+    
+    
+    ~~~Ini
+    SELECT
+      OrderDate,
+      DATEDIFF(
+        STR_TO_DATE('1997-01-01 13:24:35', '%Y-%m-%d %T'),
+        OrderDate
+      ),
+      TIMEDIFF(
+        STR_TO_DATE('1997-01-01 13:24:35', '%Y-%m-%d %T'),
+        STR_TO_DATE(CONCAT(OrderDate, ' ', '00:00:00'), '%Y-%m-%d %T')
+      )
+    FROM Orders;
+    ~~~
+    OrderDate의 날짜와 1997년 1월 1일 00시 00분 00초가 얼마나 날짜가 차이나는지 반환
+    OrderDate의 시간과 ""의 시간이 얼마나 차이나는지 반환
+    OrderDate는 시분초가 없어서 '00:00:00'을 붙혀줌
+    
+    
     
   </div>
   </details>
 
+                          
+  <details>
+  <summary> 4. 기타 함수들 </summary>
+  <div markdown="1">
+    
+    |형식|설명|
+    |---|---|    
+    | IF(조건, T, F) |조건이 참이면 T, 거짓이면 F반환|
+    | IFNULL(A, B) | A가 NULL일 시 B 출력|
+    
+    ~~~Ini
+    SELECT
+      Price,
+      IF (Price > 30, 'Expensive', 'Cheap'),
+      CASE
+        WHEN Price < 20 THEN '저가'
+        WHEN Price BETWEEN 20 AND 30 THEN '일반'
+        ELSE '고가'
+      END
+    FROM Products;
+    ~~~
+    Products 데이터의 Price를 반환,
+    Price가 >30이상이면 E, 낮으면 C 반환
+    Price 20미만은 저가/ 20이상 30이하는 일반 / 나머지는 고가
+    
+  </div>
+  </details>
 
+  
 </div>
 </details>

@@ -584,27 +584,27 @@ LIMIT 30, 10
   <details>
   <summary> 4. 기타 함수들 </summary>
   <div markdown="1">
-    
-    |형식|설명|
-    |---|---|    
-    | IF(조건, T, F) |조건이 참이면 T, 거짓이면 F반환|
-    | IFNULL(A, B) | A가 NULL일 시 B 출력|
-    
-    ~~~Ini
-    SELECT
-      Price,
-      IF (Price > 30, 'Expensive', 'Cheap'),
-      CASE
-        WHEN Price < 20 THEN '저가'
-        WHEN Price BETWEEN 20 AND 30 THEN '일반'
-        ELSE '고가'
-      END
-    FROM Products;
-    ~~~
-    Products 데이터의 Price를 반환,
-    Price가 >30이상이면 E, 낮으면 C 반환
-    Price 20미만은 저가/ 20이상 30이하는 일반 / 나머지는 고가
-    
+
+  |형식|설명|
+  |---|---|    
+  | IF(조건, T, F) |조건이 참이면 T, 거짓이면 F반환|
+  | IFNULL(A, B) | A가 NULL일 시 B 출력|
+
+  ~~~Ini
+  SELECT
+    Price,
+    IF (Price > 30, 'Expensive', 'Cheap'),
+    CASE
+      WHEN Price < 20 THEN '저가'
+      WHEN Price BETWEEN 20 AND 30 THEN '일반'
+      ELSE '고가'
+    END
+  FROM Products;
+  ~~~
+  Products 데이터의 Price를 반환,
+  Price가 >30이상이면 E, 낮으면 C 반환
+  Price 20미만은 저가/ 20이상 30이하는 일반 / 나머지는 고가
+
   </div>
   </details>
 

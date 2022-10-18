@@ -323,3 +323,29 @@ Employees에 FirstName, LastName을 ' '으로 합쳐주어 FUllName이라는 열
 SELECT OrderID, CONCAT('O-ID: ', OrderID) FROM Orders;
 ~~~
 
+
+ |연산자|의미|
+|---|---|
+|SUBSTR, SUBSTRING|주어진 값에 따라 문자열을 자름|
+|LEFT|왼쪽부터 N 글자 자름|
+|RIGHT|오른쪽분터 N 글자 자름|
+
+~~~Ini
+SELECT
+  OrderDate,
+  LEFT(OrderDate, 4) AS Year,
+  SUBSTR(OrderDate, 6, 2) AS Month,
+  RIGHT(OrderDate, 2) AS Day
+FROM Orders;
+
+~~~
+1996-07-04와 같은 문자열
+LEFT는 1996을 가져와서 YEAR로 가져옴
+SUBSTR은 앞에서 6번째 문자에서 2개의 문자를 가져와서 MOTH에 저장 
+LIGHT는 04을 가져와서 DAY로 가져옴
+\#참고로 SQL문자열은 인덱스가 1부터 시작
+
+
+
+
+

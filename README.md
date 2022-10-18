@@ -489,7 +489,52 @@ LIMIT 30, 10
     SELECT
       HOUR(NOW()), MINUTE(NOW()), SECOND(NOW());
     ~~~
-    I
+    현재 시간, 분, 초를 반환
+    
+    |함수|의미|
+    |---|---|
+    |ADDDATE, DATE_ADD| 시간/날짜 더하기|
+    |SUBDATE, DATE_SUB| 시간 날짜 빼기|
+    ~~~Ini
+    SELECT 
+      ADDDATE('2021-06-20', INTERVAL 1 YEAR),
+      ADDDATE('2021-06-20', INTERVAL -2 MONTH),
+      ADDDATE('2021-06-20', INTERVAL 3 WEEK),
+      ADDDATE('2021-06-20', INTERVAL -4 DAY),
+      ADDDATE('2021-06-20', INTERVAL -5 MINUTE),
+      ADDDATE('2021-06-20 13:01:12', INTERVAL 6 SECOND);
+    ~~~
+    INTERVAL을 사용하여 주어진 시간에서 더하기 빼기 가능
+    
+    |함수|의미|
+    |---|---|
+    |ADDDATE, DATE_ADD| 시간/날짜 더하기|
+    |SUBDATE, DATE_SUB| 시간 날짜 빼기|
+    
+    
+    |함수|의미|
+    |---|---|
+    |DATE_DIFF| 두 시간/날짜 간 일수차 |
+    |TIME_DIFF| 두 시간/날짜 간 시간차|
+    |LAST_DAY| 해당 달의 마지막 날짜|
+    
+    ~~~Ini
+    SELECT
+      TIMEDIFF('2021-06-21 15:20:35', '2021-06-21 16:34:41');
+    ~~~
+    ~~~Ini
+    SELECT
+      OrderDate,
+      LAST_DAY(OrderDate),
+      DAY(LAST_DAY(OrderDate)),
+      DATEDIFF(LAST_DAY(OrderDate), OrderDate)
+    FROM Orders;
+    ~~~
+    OrderDate
+    OrderDate 달의 마지막 날짜
+    
+    OrderDate의 마지막날짜와 OrderDate의 차이
+    
   </div>
   </details>
 

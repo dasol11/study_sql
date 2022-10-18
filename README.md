@@ -164,5 +164,38 @@ SELECT 'banana' NOT BETWEEN 'Apple' AND 'camera';
 SELECT * FROM OrderDetails
 WHERE ProductID BETWEEN 1 AND 4;
 ~~~
-조거문에서 활용가능함
+조건문에서 활용가능함
+
+
+|연산자|의미|
+|---|---|
+|IN (...)|괄호 안의 값들 중 있음|
+|NOT IN (...)|괄호 안의 값들 중 없음|
+
+
+~~~Ini
+SELECT * FROM Customers
+WHERE City IN ('Torino', 'Paris', 'Portland', 'Madrid') 
+~~~
+WHERE을 사용해서 열이름을 안에 내용을 선택하여 고를 수 있음
+
+
+|연산자|의미|
+|---|---|
+|LIKE '...%...'| 0~N개 문자를 가진 패턴|
+|LIKE '..._...'| _갯수만큼의 문자를 가진 패턴| 
+LKIKE 연산자는 패턴을 가진 문자열을 찾을때 유용한 연산자
+
+~~~Ini
+SELECT * FROM OrderDetails
+WHERE OrderID LIKE '1025_'
+~~~
+OrderDetails에서 OrderID의 값이 10250번대의 값을 가지는  호출
+~~~Ini
+SELECT * FROM Customers
+WHERE City Like '%d'
+~~~
+City의 값이 'd'로 끝나는 데이터 호출
+
+
 

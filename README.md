@@ -337,11 +337,10 @@ LIMIT 30, 10
     SUBSTR(OrderDate, 6, 2) AS Month,
     RIGHT(OrderDate, 2) AS Day
   FROM Orders;
-
   ~~~
   
   
-  "1996-07-04"와 같은 문자열
+  같은 문자열
   LEFT는 1996을 가져와서 YEAR로 가져옴
   SUBSTR은 앞에서 6번째 문자에서 2개의 문자를 가져와서 MOTH에 저장 
   LIGHT는 04을 가져와서 DAY로 가져옴
@@ -351,7 +350,7 @@ LIMIT 30, 10
 
   
   |함수|의미|
-  |...|....|
+  |...|...|
   |LENGTH|문자열의 바이트 길이|
   |CHAR_LENGTH, CHARACTER_LEGNTH|문자열의 문자 길이|
   
@@ -359,7 +358,7 @@ LIMIT 30, 10
   
     
   |함수|의미|
-  |...|....|
+  |...|...|
   |TRIM|양쪽 공백제거|
   |RTRIM|오른쪽 공백제거|
   |LTRIM|왼쪽 공백제거|
@@ -378,7 +377,7 @@ LIMIT 30, 10
 
     
   |함수|의미|
-  |...|....|
+  |...|...|
   |RPAD(S, N, P)|S가 N글자가 될때까지 오른쪽에 P를 이어붙임|
   |LPAD(S, N, P)|S가 N글자가 될때까지 왼쪽에 P를 이어붙임|
   
@@ -392,7 +391,7 @@ LIMIT 30, 10
   
 
   |함수|의미|
-  |...|....|
+  |...|...|
   |REPLACE(S, A, B)| S중 A를 B로 변경|
   |INSTR(S,s)| S증 s의 첫 위치 반환 , 없으면 0|
   |CAST(A, T)| A를 T자료형으로 변환|

@@ -202,7 +202,7 @@ LIMIT 30, 10
 # 함수
 1. 숫자와 문자열을 다루는 함수들
 
-  |연산자|의미|
+  |함수|의미|
   |---|---|
   |ROUND|반올림|
   |CEIL|올림|
@@ -210,7 +210,7 @@ LIMIT 30, 10
   |ABS|절대값|
   간단해서 패스
 
-  |연산자|의미|
+  |함수|의미|
   |---|---|
   |GREATEST|(괄호안에서)가장 큰값|
   |LEAST|(괄호안에서)가장 작은값|
@@ -225,7 +225,7 @@ LIMIT 30, 10
   OrderDetails의 (OrderDetailID, ProductID, Quantity)값중 가장 큰것과 작은것을 호출
 
 
-  |연산자|의미|
+  |함수|의미|
   |---|---|
   |MAX|가장 큰 값|
   |MIN|가장 작은값|
@@ -250,7 +250,7 @@ LIMIT 30, 10
   OrderDetailID가 20~30번째 데이터를 가져와서 Quantity열의 데이터를 비교함
 
 
-  |연산자|의미|
+  |함수|의미|
   |---|---|
   |POW(A,B), POWER(A,B)|가장 큰 값|
   |SQRT|제곱근|
@@ -263,7 +263,7 @@ LIMIT 30, 10
   Products에서 Price와 Price의 1/2승을 Price의 제곱근 값이 4보다 작으면 가져옴
 
 
-  |연산자|의미|
+  |함수|의미|
   |---|---|
   |TRUMCATE(N,n)|N을 소숫점 n자리까지 선택|
   ~~~Ini
@@ -287,7 +287,7 @@ LIMIT 30, 10
 
 2. 문자와 관련된 함수들
 
-  |연산자|의미|
+  |함수|의미|
   |---|---|
   |UCASE, UPPER| 모두 대문자로|
   |LCASE, LOWER| 모두 소문자로|
@@ -300,7 +300,7 @@ LIMIT 30, 10
   ~~~
 
 
-   |연산자|의미|
+  |함수|의미|
   |---|---|
   |CONCAT(...)|괄호 안의 내용 이어붙임|
   |CONCAT_WS(S, ... )|괄호 안의 내용을 S로 이어붙임|
@@ -324,7 +324,7 @@ LIMIT 30, 10
   ~~~
 
 
-   |연산자|의미|
+  |함수|의미|
   |---|---|
   |SUBSTR, SUBSTRING|주어진 값에 따라 문자열을 자름|
   |LEFT|왼쪽부터 N 글자 자름|
@@ -339,7 +339,9 @@ LIMIT 30, 10
   FROM Orders;
 
   ~~~
-  1996\-07\-04와 같은 문자열
+  
+  
+  "1996-07-04"와 같은 문자열
   LEFT는 1996을 가져와서 YEAR로 가져옴
   SUBSTR은 앞에서 6번째 문자에서 2개의 문자를 가져와서 MOTH에 저장 
   LIGHT는 04을 가져와서 DAY로 가져옴
@@ -347,5 +349,71 @@ LIMIT 30, 10
 
 
 
+  
+  |함수|의미|
+  |...|....|
+  |LENGTH|문자열의 바이트 길이|
+  |CHAR_LENGTH, CHARACTER_LEGNTH|문자열의 문자 길이|
+  
+  
+  
+    
+  |함수|의미|
+  |...|....|
+  |TRIM|양쪽 공백제거|
+  |RTRIM|오른쪽 공백제거|
+  |LTRIM|왼쪽 공백제거|
+  
+  
+  
+  ~~~Ini
+  SELECT
+    CONCAT('|', ' HELLO ', '|'),
+    CONCAT('|', LTRIM(' HELLO '), '|'),
+    CONCAT('|', RTRIM(' HELLO '), '|'),
+    CONCAT('|', TRIM(' HELLO '), '|');
+  
+  ~~~
+  
+
+    
+  |함수|의미|
+  |...|....|
+  |RPAD(S, N, P)|S가 N글자가 될때까지 오른쪽에 P를 이어붙임|
+  |LPAD(S, N, P)|S가 N글자가 될때까지 왼쪽에 P를 이어붙임|
+  
+  
+  ~~~Ini
+  SELECT
+    LPAD(SupplierID, 5, 0),
+    RPAD(Price, 6, 0)
+    FROM Products;
+  ~~~
+  
+
+  |함수|의미|
+  |...|....|
+  |REPLACE(S, A, B)| S중 A를 B로 변경|
+  |INSTR(S,s)| S증 s의 첫 위치 반환 , 없으면 0|
+  |CAST(A, T)| A를 T자료형으로 변환|
+  
+  ~~~Ini
+  REPLACE(S, A, B)	
+  ~~~
+  ~~~Ini
+  SELECT
+  INSTR('ABCDE', 'ABC'),
+  INSTR('ABCDE', 'BCDE'),
+  INSTR('ABCDE', 'C'),
+  INSTR('ABCDE', 'DE'),
+  INSTR('ABCDE', 'F');
+  ~~~  
+  ~~~Ini
+  SELECT
+  '01' = '1',
+  CONVERT('01', DECIMAL) = CONVERT('1', DECIMAL);
+  ~~~
 
 
+1. 시간/날짜 관련 및 기타 함수들
+ 

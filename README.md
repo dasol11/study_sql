@@ -425,6 +425,23 @@ LIMIT 30, 10
   <summary> 3. 시간/날짜 관련 및 기타 함수들 </summary>
   <div markdown="1">
 
+  |함수|의미|
+  |---|---|
+  |CURRENT_DATE, CURDATE| 현재 날짜 반환 |
+  |CURRENT_TIME, CURTIME| 현재 시간 반환 |  
+  |CURRENT_TIMESTAMP, NOW| 현재 시간과 날짜를 반환|
+  
+    
+  ~~~Ini
+  SELECT CURDATE(), CURTIME(), NOW();
+  ~~~
+    
+    
+    
+  
+    
+  
+    
   
   </div>
   </details>

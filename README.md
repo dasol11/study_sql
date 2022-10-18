@@ -235,7 +235,8 @@ LIMIT 30, 10
 
   - GREATEST와 MAX의 차이  
   
-    GREATEST와 괄호안의 대상들 사이에서 큰값
+    GREATEST와 괄호안의 대상들 사이에서 큰값  
+    
     MAX는 열에서 가장 큰값
   ~~~Ini
   SELECT
@@ -329,14 +330,15 @@ LIMIT 30, 10
   |---|---|
   |SUBSTR, SUBSTRING|주어진 값에 따라 문자열을 자름|
   |LEFT|왼쪽부터 N 글자 자름|
-  |RIGHT|오른쪽분터 N 글자 자름|
+  |RIGHT|오른쪽분터 N 글자 자름|  
+  
 
   
 
   |함수|의미|
   |...|...|
   |LENGTH|문자열의 바이트 길이|
-  |CHAR_LENGTH, CHARACTER_LEGNTH|문자열의 문자 길이|
+  |CHAR_LENGTH, CHARACTER_LEGNTH|문자열의 문자 길이|  
   
   
   
@@ -345,7 +347,8 @@ LIMIT 30, 10
   |...|...|
   |TRIM|양쪽 공백제거|
   |RTRIM|오른쪽 공백제거|
-  |LTRIM|왼쪽 공백제거|
+  |LTRIM|왼쪽 공백제거|  
+  
   
   
   

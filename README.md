@@ -233,7 +233,8 @@ LIMIT 30, 10
   |SUM|총합|
   |AVG|평균 값|
 
-  - GREATEST와 MAX의 차이
+  - GREATEST와 MAX의 차이  
+  
     GREATEST와 괄호안의 대상들 사이에서 큰값
     MAX는 열에서 가장 큰값
   ~~~Ini
@@ -371,29 +372,28 @@ LIMIT 30, 10
   FROM Products;
   ~~~
   
-|함수|의미|
-|...|...|
-|REPLACE(S, A, B)| S중 A를 B로 변경|
-|INSTR(S,s)| S증 s의 첫 위치 반환 , 없으면 0|
-|CAST(A, T)| A를 T자료형으로 변환|
-  
-~~~Ini
-REPLACE(S, A, B)	
-~~~
-~~~Ini
-SELECT
-INSTR('ABCDE', 'ABC'),
-INSTR('ABCDE', 'BCDE'),
-INSTR('ABCDE', 'C'),
-INSTR('ABCDE', 'DE'),
-INSTR('ABCDE', 'F');
-~~~  
-~~~Ini
-SELECT
-  '01' = '1',
-CONVERT('01', DECIMAL) = CONVERT('1', DECIMAL);
-~~~
+  |함수|의미|
+  |...|...|
+  |REPLACE(S, A, B)| S중 A를 B로 변경|
+  |INSTR(S,s)| S증 s의 첫 위치 반환 , 없으면 0|
+  |CAST(A, T)| A를 T자료형으로 변환|
 
+  ~~~Ini
+  REPLACE(S, A, B)	
+  ~~~
+  ~~~Ini
+  SELECT
+  INSTR('ABCDE', 'ABC'),
+  INSTR('ABCDE', 'BCDE'),
+  INSTR('ABCDE', 'C'),
+  INSTR('ABCDE', 'DE'),
+  INSTR('ABCDE', 'F');
+  ~~~  
+  ~~~Ini
+  SELECT
+    '01' = '1',
+  CONVERT('01', DECIMAL) = CONVERT('1', DECIMAL);
+  ~~~
 
 3. 시간/날짜 관련 및 기타 함수들
- 
+

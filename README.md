@@ -183,8 +183,8 @@ WHERE을 사용해서 열이름을 안에 내용을 선택하여 고를 수 있�
 |연산자|의미|
 |---|---|
 |LIKE '...%...'| 0~N개 문자를 가진 패턴|
-|LIKE '..._...'| _갯수만큼의 문자를 가진 패턴| 
-LKIKE 연산자는 패턴을 가진 문자열을 찾을때 유용한 연산자
+|LIKE '...\_...'| \_갯수만큼의 문자를 가진 패턴| 
+LIKE 연산자는 패턴을 가진 문자열을 찾을때 유용한 연산자
 
 ~~~Ini
 SELECT * FROM OrderDetails
@@ -198,4 +198,128 @@ WHERE City Like '%d'
 City의 값이 'd'로 끝나는 데이터 호출
 
 
+
+# 함수
+1. 숫자와 문자열을 다루는 함수들
+
+|연산자|의미|
+|---|---|
+|ROUND|반올림|
+|CEIL|올림|
+|FLOOR|내림|
+|ABS|절대값|
+간단해서 패스
+
+|연산자|의미|
+|---|---|
+|GREATEST|(괄호안에서)가장 큰값|
+|LEAST|(괄호안에서)가장 작은값|
+
+~~~Ini
+SELECT
+  OrderDetailID, ProductID, Quantity,
+  GREATEST(OrderDetailID, ProductID, Quantity),
+  LEAST(OrderDetailID, ProductID, Quantity)
+FROM OrderDetails;
+~~~
+OrderDetails의 (OrderDetailID, ProductID, Quantity)값중 가장 큰것과 작은것을 호출
+
+
+|연산자|의미|
+|---|---|
+|MAX|가장 큰 값|
+|MIN|가장 작은값|
+|COUNT|갯수 (NULL은 포함 x)|
+|SUM|총합|
+|AVG|평균 값|
+
+- GREATEST와 MAX의 차이
+  GREATEST와 괄호안의 대상들 사이에서 큰값
+  MAX는 열에서 가장 큰값
+~~~Ini
+SELECT
+  MAX(Quantity),
+  MIN(Quantity),
+  COUNT(Quantity),
+  SUM(Quantity),
+  AVG(Quantity)
+FROM OrderDetails
+WHERE OrderDetailID BETWEEN 20 AND 30;
+~~~
+
+OrderDetailID가 20~30번째 데이터를 가져와서 Quantity열의 데이터를 비교함
+
+
+|연산자|의미|
+|---|---|
+|POW(A,B), POWER(A,B)|가장 큰 값|
+|SQRT|제곱근|
+~~~Ini
+SELECT Price, POW(Price, 1/2)
+FROM Products
+WHERE SQRT(Price) < 4;
+~~~ 
+
+Products에서 Price와 Price의 1/2승을 Price의 제곱근 값이 4보다 작으면 가져옴
+
+
+|연산자|의미|
+|---|---|
+|TRUMCATE(N,n)|N을 소숫점 n자리까지 선택|
+~~~Ini
+SELECT
+  TRUNCATE(1234.5678, 1),
+  TRUNCATE(1234.5678, 2),
+  TRUNCATE(1234.5678, 3),
+  TRUNCATE(1234.5678, -1),
+  TRUNCATE(1234.5678, -2),
+  TRUNCATE(1234.5678, -3);
+~~~
+소숫점에서 짤라내어 데이터를 가져옴
+
+
+
+~~~Ini
+SELECT Price FROM Products
+WHERE TRUNCATE(Price, 0) = 12;
+~~~
+Price를 소수점 없이 표현했을대 값이 12와 같으면 데이터를 가져옴
+
+2. 문자와 관련된 함수들
+
+|연산자|의미|
+|---|---|
+|UCASE, UPPER| 모두 대문자로|
+|LCASE, LOWER| 모두 소문자로|
+
+~~~Ini
+SELECT
+  UCASE(CustomerName),
+  LCASE(ContactName)
+FROM Customers;
+~~~
+
+
+ |연산자|의미|
+|---|---|
+|CONCAT(...)|괄호 안의 내용 이어붙임|
+|CONCAT_WS(S, ... )|괄호 안의 내용을 S로 이어붙임|
+
+
+~~~Ini
+SELECT OrderID, CONCAT('O-ID: ', OrderID) FROM Orders;
+~~~
+
+~~~Ini
+SELECT
+  FirstName, LastName, CONCAT_WS(' ', FirstName, LastName) AS FullName
+FROM Employees;
+~~~
+Employees에 FirstName, LastName을 ' '으로 합쳐주어 FUllName이라는 열이름으로 호출
+
+
+
+~~~Ini
+SELECT OrderID, CONCAT('O-ID: ', OrderID) FROM Orders;
+~~~
 

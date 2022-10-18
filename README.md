@@ -212,7 +212,11 @@ LIMIT 30, 10
 <div markdown="1">
 
 # 함수
-1. 숫자와 문자열을 다루는 함수들
+  <details>
+  <summary> 1. 숫자와 문자열을 다루는 함수들</summary>
+  <div markdown="1">
+
+
 
   |함수|의미|
   |---|---|
@@ -298,8 +302,13 @@ LIMIT 30, 10
   WHERE TRUNCATE(Price, 0) = 12;
   ~~~
   Price를 소수점 없이 표현했을대 값이 12와 같으면 데이터를 가져옴
+  </div>
+  </details>
 
-2. 문자와 관련된 함수들
+                        
+  <details>
+  <summary> 2. 문자와 관련된 함수들 </summary>
+  <div markdown="1">
 
   |함수|의미|
   |---|---|
@@ -409,15 +418,17 @@ LIMIT 30, 10
     '01' = '1',
   CONVERT('01', DECIMAL) = CONVERT('1', DECIMAL);
   ~~~
-</div>
-</details>
-
-<details>
-<summary> 3. 시간/날짜 관련 및 기타 함수들 </summary>
-<div markdown="1">
+  </div>
+  </details>
+  
+  <details>
+  <summary> 3. 시간/날짜 관련 및 기타 함수들 </summary>
+  <div markdown="1">
 
   
+  </div>
+  </details>
+
+
 </div>
 </details>
-
-

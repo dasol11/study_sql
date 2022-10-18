@@ -425,24 +425,71 @@ LIMIT 30, 10
   <summary> 3. 시간/날짜 관련 및 기타 함수들 </summary>
   <div markdown="1">
 
-  |함수|의미|
-  |---|---|
-  |CURRENT_DATE, CURDATE| 현재 날짜 반환 |
-  |CURRENT_TIME, CURTIME| 현재 시간 반환 |  
-  |CURRENT_TIMESTAMP, NOW| 현재 시간과 날짜를 반환|
+    |함수|의미|
+    |---|---|
+    |CURRENT_DATE, CURDATE| 현재 날짜 반환 |
+    |CURRENT_TIME, CURTIME| 현재 시간 반환 |  
+    |CURRENT_TIMESTAMP, NOW| 현재 시간과 날짜를 반환|
   
     
-  ~~~Ini
-  SELECT CURDATE(), CURTIME(), NOW();
-  ~~~
-    
-    
-    
+    ~~~Ini
+    SELECT CURDATE(), CURTIME(), NOW();
+    ~~~
   
+    |함수|의미|
+    |---|---|
+    |DATE| 문자열에 따라 날짜 생성 |
+    |TIME| 문자열에 따라 시간 생성 |
     
-  
+    ~~~Ini
+    SELECT * FROM Orders
+    WHERE
+      OrderDate BETWEEN DATE('1997-1-1') AND DATE('1997-1-31');
+    ~~~
+    1997년 1월 1일 부터 1월 31일 사이의 데이터를 가져옴
     
-  
+    |함수|의미|
+    |---|---|
+    |YEAR| 주어진 DATETIME값의 년도 반환|
+    |MONTHNAME| 주어진 DATETIME값의 월(영문) 반환|
+    |MONTH| 주어진 DATETIME값의 월 반환|
+    |WEEKDAY| 주어진 DATETIME값의 요일반환 (월요일 : 0)|
+    |DAYNAME| 주어진 DATETIME값의 요일명 반환|
+    |DAYOFMONTH, DAY| 주어진 DATETIME값의 날짜 반환|
+    ~~~Ini
+    SELECT * FROM Orders
+    WHERE WEEKDAY(OrderDate) = 0;
+    ~~~
+    OrderDate값의 요일이 월요일(0)이면 불러온다 
+    ~~~Ini
+    SELECT
+    OrderDate,
+    CONCAT(
+        CONCAT_WS(
+          '/',
+          YEAR(OrderDate), MONTH(OrderDate), DAY(OrderDate)
+        ),
+        ' ',
+        UPPER(LEFT(DAYNAME(OrderDate), 3))
+      )
+    FROM Orders;
+    ~~~
+    OrderDate의 년, 월, 일을 받아와 '/'으로 합쳐주고,
+    ' ', DAYNAME(OrderDate)의 왼쪽부터 3번째까지 대문자로 변경한문자열과 합쳐서 반환
+    
+    
+    |함수|의미|
+    |---|---|
+    |HOUR| 주어진 DATETIME의 시 반환|
+    |MINUTE| 주어진 DATETIME의 분 반환|
+    |SECOND| 주어진 DATETIME의 초 반환|
+    
+    
+    ~~~Ini
+    SELECT
+      HOUR(NOW()), MINUTE(NOW()), SECOND(NOW());
+    ~~~
+    I
   </div>
   </details>
 

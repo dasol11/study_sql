@@ -418,6 +418,7 @@ LIMIT 30, 10
     '01' = '1',
   CONVERT('01', DECIMAL) = CONVERT('1', DECIMAL);
   ~~~
+    
   </div>
   </details>
   
@@ -425,157 +426,157 @@ LIMIT 30, 10
   <summary> 3. 시간/날짜 관련 및 기타 함수들 </summary>
   <div markdown="1">
 
-    |함수|의미|
-    |---|---|
-    |CURRENT_DATE, CURDATE| 현재 날짜 반환 |
-    |CURRENT_TIME, CURTIME| 현재 시간 반환 |  
-    |CURRENT_TIMESTAMP, NOW| 현재 시간과 날짜를 반환|
+  |함수|의미|
+  |---|---|
+  |CURRENT_DATE, CURDATE| 현재 날짜 반환 |
+  |CURRENT_TIME, CURTIME| 현재 시간 반환 |  
+  |CURRENT_TIMESTAMP, NOW| 현재 시간과 날짜를 반환|
   
     
-    ~~~Ini
-    SELECT CURDATE(), CURTIME(), NOW();
-    ~~~
-  
-    |함수|의미|
-    |---|---|
-    |DATE| 문자열에 따라 날짜 생성 |
-    |TIME| 문자열에 따라 시간 생성 |
-    
-    ~~~Ini
-    SELECT * FROM Orders
-    WHERE
-      OrderDate BETWEEN DATE('1997-1-1') AND DATE('1997-1-31');
-    ~~~
-    1997년 1월 1일 부터 1월 31일 사이의 데이터를 가져옴
-    
-    |함수|의미|
-    |---|---|
-    |YEAR| 주어진 DATETIME값의 년도 반환|
-    |MONTHNAME| 주어진 DATETIME값의 월(영문) 반환|
-    |MONTH| 주어진 DATETIME값의 월 반환|
-    |WEEKDAY| 주어진 DATETIME값의 요일반환 (월요일 : 0)|
-    |DAYNAME| 주어진 DATETIME값의 요일명 반환|
-    |DAYOFMONTH, DAY| 주어진 DATETIME값의 날짜 반환|
-    ~~~Ini
-    SELECT * FROM Orders
-    WHERE WEEKDAY(OrderDate) = 0;
-    ~~~
-    OrderDate값의 요일이 월요일(0)이면 불러온다 
-    ~~~Ini
-    SELECT
-    OrderDate,
-    CONCAT(
-        CONCAT_WS(
-          '/',
-          YEAR(OrderDate), MONTH(OrderDate), DAY(OrderDate)
-        ),
-        ' ',
-        UPPER(LEFT(DAYNAME(OrderDate), 3))
-      )
-    FROM Orders;
-    ~~~
-    OrderDate의 년, 월, 일을 받아와 '/'으로 합쳐주고,
-    ' ', DAYNAME(OrderDate)의 왼쪽부터 3번째까지 대문자로 변경한문자열과 합쳐서 반환
-    
-    
-    |함수|의미|
-    |---|---|
-    |HOUR| 주어진 DATETIME의 시 반환|
-    |MINUTE| 주어진 DATETIME의 분 반환|
-    |SECOND| 주어진 DATETIME의 초 반환|
-    
-    
-    ~~~Ini
-    SELECT
-      HOUR(NOW()), MINUTE(NOW()), SECOND(NOW());
-    ~~~
-    현재 시간, 분, 초를 반환
-    
-    |함수|의미|
-    |---|---|
-    |ADDDATE, DATE_ADD| 시간/날짜 더하기|
-    |SUBDATE, DATE_SUB| 시간 날짜 빼기|
-    ~~~Ini
-    SELECT 
-      ADDDATE('2021-06-20', INTERVAL 1 YEAR),
-      ADDDATE('2021-06-20', INTERVAL -2 MONTH),
-      ADDDATE('2021-06-20', INTERVAL 3 WEEK),
-      ADDDATE('2021-06-20', INTERVAL -4 DAY),
-      ADDDATE('2021-06-20', INTERVAL -5 MINUTE),
-      ADDDATE('2021-06-20 13:01:12', INTERVAL 6 SECOND);
-    ~~~
-    INTERVAL을 사용하여 주어진 시간에서 더하기 빼기 가능
-    
-    |함수|의미|
-    |---|---|
-    |ADDDATE, DATE_ADD| 시간/날짜 더하기|
-    |SUBDATE, DATE_SUB| 시간 날짜 빼기|
-    
-    
-    |함수|의미|
-    |---|---|
-    |DATE_DIFF| 두 시간/날짜 간 일수차 |
-    |TIME_DIFF| 두 시간/날짜 간 시간차|
-    |LAST_DAY| 해당 달의 마지막 날짜|
-    
-    ~~~Ini
-    SELECT
-      TIMEDIFF('2021-06-21 15:20:35', '2021-06-21 16:34:41');
-    ~~~
-    ~~~Ini
-    SELECT
-      OrderDate,
-      LAST_DAY(OrderDate),
-      DAY(LAST_DAY(OrderDate)),
-      DATEDIFF(LAST_DAY(OrderDate), OrderDate)
-    FROM Orders;
-    ~~~
-    OrderDate,
-    OrderDate 달의 마지막 일,
-    OrderDate의 주어진 일,
-    OrderDate의 마지막 일과 OrderDate의 주어진 일 차이 반환
-    
-    |함수|의미|
-    |---|---|
-    |DATE_FORMAT|시간/날짜를 지정한 형식으로 반환|
-    
-    ~~~Ini
-    SELECT REPLACE(
-      REPLACE(
-        DATE_FORMAT(NOW(), '%Y년 %m월 %d일 %p %h시 %i분 %초'),
-        'AM', '오전'
+  ~~~Ini
+  SELECT CURDATE(), CURTIME(), NOW();
+  ~~~
+
+  |함수|의미|
+  |---|---|
+  |DATE| 문자열에 따라 날짜 생성 |
+  |TIME| 문자열에 따라 시간 생성 |
+
+  ~~~Ini
+  SELECT * FROM Orders
+  WHERE
+    OrderDate BETWEEN DATE('1997-1-1') AND DATE('1997-1-31');
+  ~~~
+  1997년 1월 1일 부터 1월 31일 사이의 데이터를 가져옴
+
+  |함수|의미|
+  |---|---|
+  |YEAR| 주어진 DATETIME값의 년도 반환|
+  |MONTHNAME| 주어진 DATETIME값의 월(영문) 반환|
+  |MONTH| 주어진 DATETIME값의 월 반환|
+  |WEEKDAY| 주어진 DATETIME값의 요일반환 (월요일 : 0)|
+  |DAYNAME| 주어진 DATETIME값의 요일명 반환|
+  |DAYOFMONTH, DAY| 주어진 DATETIME값의 날짜 반환|
+  ~~~Ini
+  SELECT * FROM Orders
+  WHERE WEEKDAY(OrderDate) = 0;
+  ~~~
+  OrderDate값의 요일이 월요일(0)이면 불러온다 
+  ~~~Ini
+  SELECT
+  OrderDate,
+  CONCAT(
+      CONCAT_WS(
+        '/',
+        YEAR(OrderDate), MONTH(OrderDate), DAY(OrderDate)
       ),
-      'PM', '오후'
+      ' ',
+      UPPER(LEFT(DAYNAME(OrderDate), 3))
     )
-    
-    ~~~
-    현재 시간을 ''안에 지정된 형식으로 반환 후,
-    'AM'은 오전,'PM'은 오후로 반환
-    
-    |함수|의미|
-    |---|---| 
-    |STR_TO_DATE(S, F)|S를 F형식으로 해석하여 시간/날짜 생성|
-    
-    
-    ~~~Ini
-    SELECT
-      OrderDate,
-      DATEDIFF(
-        STR_TO_DATE('1997-01-01 13:24:35', '%Y-%m-%d %T'),
-        OrderDate
-      ),
-      TIMEDIFF(
-        STR_TO_DATE('1997-01-01 13:24:35', '%Y-%m-%d %T'),
-        STR_TO_DATE(CONCAT(OrderDate, ' ', '00:00:00'), '%Y-%m-%d %T')
-      )
-    FROM Orders;
-    ~~~
-    OrderDate의 날짜와 1997년 1월 1일 00시 00분 00초가 얼마나 날짜가 차이나는지 반환
-    OrderDate의 시간과 ""의 시간이 얼마나 차이나는지 반환
-    OrderDate는 시분초가 없어서 '00:00:00'을 붙혀줌
-    
-    
-    
+  FROM Orders;
+  ~~~
+  OrderDate의 년, 월, 일을 받아와 '/'으로 합쳐주고,
+  ' ', DAYNAME(OrderDate)의 왼쪽부터 3번째까지 대문자로 변경한문자열과 합쳐서 반환
+
+
+  |함수|의미|
+  |---|---|
+  |HOUR| 주어진 DATETIME의 시 반환|
+  |MINUTE| 주어진 DATETIME의 분 반환|
+  |SECOND| 주어진 DATETIME의 초 반환|
+
+
+  ~~~Ini
+  SELECT
+    HOUR(NOW()), MINUTE(NOW()), SECOND(NOW());
+  ~~~
+  현재 시간, 분, 초를 반환
+
+  |함수|의미|
+  |---|---|
+  |ADDDATE, DATE_ADD| 시간/날짜 더하기|
+  |SUBDATE, DATE_SUB| 시간 날짜 빼기|
+  ~~~Ini
+  SELECT 
+    ADDDATE('2021-06-20', INTERVAL 1 YEAR),
+    ADDDATE('2021-06-20', INTERVAL -2 MONTH),
+    ADDDATE('2021-06-20', INTERVAL 3 WEEK),
+    ADDDATE('2021-06-20', INTERVAL -4 DAY),
+    ADDDATE('2021-06-20', INTERVAL -5 MINUTE),
+    ADDDATE('2021-06-20 13:01:12', INTERVAL 6 SECOND);
+  ~~~
+  INTERVAL을 사용하여 주어진 시간에서 더하기 빼기 가능
+
+  |함수|의미|
+  |---|---|
+  |ADDDATE, DATE_ADD| 시간/날짜 더하기|
+  |SUBDATE, DATE_SUB| 시간 날짜 빼기|
+
+
+  |함수|의미|
+  |---|---|
+  |DATE_DIFF| 두 시간/날짜 간 일수차 |
+  |TIME_DIFF| 두 시간/날짜 간 시간차|
+  |LAST_DAY| 해당 달의 마지막 날짜|
+
+  ~~~Ini
+  SELECT
+    TIMEDIFF('2021-06-21 15:20:35', '2021-06-21 16:34:41');
+  ~~~
+  ~~~Ini
+  SELECT
+    OrderDate,
+    LAST_DAY(OrderDate),
+    DAY(LAST_DAY(OrderDate)),
+    DATEDIFF(LAST_DAY(OrderDate), OrderDate)
+  FROM Orders;
+  ~~~
+  OrderDate,
+  OrderDate 달의 마지막 일,
+  OrderDate의 주어진 일,
+  OrderDate의 마지막 일과 OrderDate의 주어진 일 차이 반환
+
+  |함수|의미|
+  |---|---|
+  |DATE_FORMAT|시간/날짜를 지정한 형식으로 반환|
+
+  ~~~Ini
+  SELECT REPLACE(
+    REPLACE(
+      DATE_FORMAT(NOW(), '%Y년 %m월 %d일 %p %h시 %i분 %초'),
+      'AM', '오전'
+    ),
+    'PM', '오후'
+  )
+
+  ~~~
+  현재 시간을 ''안에 지정된 형식으로 반환 후,
+  'AM'은 오전,'PM'은 오후로 반환
+
+  |함수|의미|
+  |---|---| 
+  |STR_TO_DATE(S, F)|S를 F형식으로 해석하여 시간/날짜 생성|
+
+
+  ~~~Ini
+  SELECT
+    OrderDate,
+    DATEDIFF(
+      STR_TO_DATE('1997-01-01 13:24:35', '%Y-%m-%d %T'),
+      OrderDate
+    ),
+    TIMEDIFF(
+      STR_TO_DATE('1997-01-01 13:24:35', '%Y-%m-%d %T'),
+      STR_TO_DATE(CONCAT(OrderDate, ' ', '00:00:00'), '%Y-%m-%d %T')
+    )
+  FROM Orders;
+  ~~~
+  OrderDate의 날짜와 1997년 1월 1일 00시 00분 00초가 얼마나 날짜가 차이나는지 반환
+  OrderDate의 시간과 ""의 시간이 얼마나 차이나는지 반환
+  OrderDate는 시분초가 없어서 '00:00:00'을 붙혀줌
+
+
+
   </div>
   </details>
 

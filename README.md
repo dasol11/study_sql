@@ -650,8 +650,8 @@ LIMIT 30, 10
   GROUP BY CategoryID;  
     
   ~~~
-  Products 테이블을 가져와서 CategoryID로 묶어주고,
-  CategoryID랑 카테고리 마다의 Price의 최고값, 최소값, 최소최대를 더하고 2로 나눈 것을 소수점 2번째자리까지 표현해서 MedianPrice 열에 불러옴
+  Products 테이블을 가져와서 CategoryID로 묶어주고,<br/> 
+  CategoryID랑 카테고리 마다의 Price의 최고값, 최소값, 최소최대를 더하고 2로 나눈 것을 소수점 2번째자리까지 표현해서 MedianPrice 열에 불러옴<br/> 
   Price가격의 평균을 구해서 소수점 2번째 자리까지 표현
    
     

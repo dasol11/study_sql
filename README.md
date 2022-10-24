@@ -608,6 +608,45 @@ LIMIT 30, 10
   </div>
   </details>
 
+   <details>
+  <summary> 5. 조건에 따라 그룹으로 묶기 </summary>
+  <div markdown="1">
+  
+  ## GROUP BY
+  GROUP BY : 조건에 따라 **집계된** 값을 가져옴
+  (엑셀의 카운트 if와 같은 느낌? 확실 ㄴㄴ)
+  ~~~Ini
+  
+  SELECT CategoryID FROM Products
+  GROUP BY CategoryID;
+  ~~~
+  Products 데이터의 CategoryID 열에 모든 값을 집계해서 CategoryID 그룹으로 묶어서 봄
+  
+  ### 여러 컬럼을 기준으로 그룹화 가능
+  ~~~Ini
+  SELECT 
+    Country, City,
+    CONCAT_WS(', ', City, Country)
+  FROM Customers
+  GROUP BY Country, City;
+  ~~~
+  
+  |Denmark|Arhus|
+  |---|---|
+  |Denmark|Kobenhavn|
+  Country에서 Denmark안에 Arhus와 Kobenhavn 있는 경우 위 표와 같이 출력됨
+  
+  ### GROUP BY와 Min, Count()와 같은 함수를 같이 사용
+  
+  
+  </div>
+  </details>
+  
+  
+  
+  
+  
+  
   
 </div>
 </details>

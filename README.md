@@ -608,7 +608,7 @@ LIMIT 30, 10
   </div>
   </details>
 
-   <details>
+  <details>
   <summary> 5. 조건에 따라 그룹으로 묶기 </summary>
   <div markdown="1">
   
@@ -639,6 +639,23 @@ LIMIT 30, 10
   ### GROUP BY와 Min, Count()와 같은 함수를 같이 사용
   
   
+  ~~~Ini
+  SELECT
+    CategoryID,
+    MAX(Price) AS MaxPrice, 
+    MIN(Price) AS MinPrice,
+    TRUNCATE((MAX(Price) + MIN(Price)) / 2, 2) AS MedianPrice,
+    TRUNCATE(AVG(Price), 2) AS AveragePrice
+  FROM Products
+  GROUP BY CategoryID;  
+    
+  ~~~
+  Products 테이블을 가져와서 CategoryID로 묶어주고,
+  CategoryID랑 카테고리 마다의 Price의 최고값, 최소값, 최소최대를 더하고 2로 나눈 것을 소수점 2번째자리까지 표현해서 MedianPrice 열에 불러옴
+  Price가격의 평균을 구해서 소수점 2번째 자리까지 표현
+   
+    
+    
   </div>
   </details>
   

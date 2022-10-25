@@ -708,3 +708,15 @@ LIMIT 30, 10
   
 </div>
 </details>
+  
+<details>
+<summary> 서브쿼리  </summary>
+<div markdown="1">
+1. 비상관 
+  
+  
+  
+    
+  
+</div>
+</details>

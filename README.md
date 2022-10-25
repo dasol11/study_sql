@@ -636,7 +636,7 @@ LIMIT 30, 10
   |Denmark|Kobenhavn|
   Country에서 Denmark안에 Arhus와 Kobenhavn 있는 경우 위 표와 같이 출력됨
   
-  ### GROUP BY와 Min, Count()와 같은 함수를 같이 사용
+  ## GROUP BY와 Min, Count()와 같은 함수를 같이 사용
   
   
   ~~~Ini
@@ -654,13 +654,25 @@ LIMIT 30, 10
   CategoryID랑 카테고리 마다의 Price의 최고값, 최소값, 최소최대를 더하고 2로 나눈 것을 소수점 2번째자리까지 표현해서 MedianPrice 열에 불러옴<br/> 
   Price가격의 평균을 구해서 소수점 2번째 자리까지 표현
    
-    
+  ~~~Ini
+  SELECT
+    Country, COUNT(*)
+  FROM Suppliers
+  GROUP BY Country
+  WITH ROLLUP;
+  ~~~
+  WITH ROLLUP을 추가하면 마지막에 총 몇개인지 테이블에 추가됨,
+  즉, 그룹된 값에 대한 합계를 구해줌
+  WITH ROLLUP은 ORDER BY와 함께 사용할 수 없음
+
     
   </div>
   </details>
   
   
   
+    
+    
   
   
   

@@ -9,11 +9,11 @@ FROM : 특정 테이블을 호출하는 함수
 SELECT : 특정 컬럼을 가져오겠다
 - AS : 특정 컬럼의 이름을 변경하여 호출
 
-~~~Ini
+~~~sql
 SELECT * FROM Customers;
 ~~~
 
-~~~Ini
+~~~sql
 SELECT
   CustomerId AS ID,
   CustomerName AS "이름",
@@ -24,7 +24,7 @@ FROM Customers
 
 ## WHERE
 WHERE : 구문 뒤에 조건을 붙여 원하는 데이터만 가져옴
-~~~Ini
+~~~sql
 SELECT * FROM Orders
 WHERE EmployeeID = 3;
 ~~~
@@ -34,7 +34,7 @@ ORDER BY : 특정 구문을 사용해서 특정 컬럼을 기준으로 데이터
 - ASC : 오름차순
 - DESC : 내림차순
 
-~~~Ini
+~~~sql
 SELECT * FROM OrderDetails
 ORDER BY ProductID ASC, Quantity DESC
 ~~~
@@ -47,11 +47,11 @@ LIMIT {가져올 갯수} 또는 LIMIT {건너뛸 갯수}, {가져올 갯수}
 
 가져올 갯수가 디폴트 0이라고 생각하면 될듯
 
-~~~Ini
+~~~sql
 SELECT * FROM Customers
 LIMIT 10
 ~~~
-~~~Ini
+~~~sql
 SELECT * FROM Customers
 LIMIT 30, 10
 ~~~
@@ -70,21 +70,21 @@ LIMIT 30, 10
   |---|---|
   |+, -, \*, / |더하기, 빼기, 곱하기, 나누기|
   |%, MOD|나머지|
-  ~~~Ini
+  ~~~sql
   SELECT 5 - 2.5 AS DIFFERENCE;
   ~~~
   연산시 문자열이 있는 경우 0 으로 취급
 
-  ~~~Ini
+  ~~~sql
   SELECT 'ABC' + 3
   result = 3
   ~~~
   문자열 안에 숫자가 있고 숫자랑 연산시 자동으로 숫자로 변환
-  ~~~Ini
+  ~~~sql
   SELECT '1' + '002' * 3
   result = 7
   ~~~
-  ~~~Ini
+  ~~~sql
   SELECT OrderID,ProductID, 
   OrderID + ProductID AS SumVal
 
@@ -93,7 +93,7 @@ LIMIT 30, 10
   OrderDetails에서 OrderID, ProductID를 불러오고,
   (OrderID+ProductID)한 결과를 SumVal이라는 컬럼으로 가져오겠다
 
-  ~~~Ini
+  ~~~sql
   SELECT
     ProductName,
     Price,
@@ -109,7 +109,7 @@ LIMIT 30, 10
   |---|---|
   |1|0|
 
-  ~~~Ini
+  ~~~sql
   SELECT * FROM Customers WHERE FLASE;
   ~~~
 
@@ -118,16 +118,17 @@ LIMIT 30, 10
   |IS| 양쪽 모두 TRUE 또는 FALSE|
   |IS NOT| 양쪽 모두 TRUE 또는 FALSE|
 
-  ~~~Ini
+  ~~~sqli
   SELECT (TRUE IS FALSE) IS NOT TRUE;
   ~~~
+  
 
   |연산자|의미|
   |---|---|
   |AND, &&|양쪽이 모두 TRUE일 때만 TRUE|
   |OR, \|\||한쪽은 TRUE이면 TRUE|
 
-  ~~~Ini
+  ~~~sql
   SELECT * FROM OrderDetails
   WHERE
     ProductId = 20
@@ -145,7 +146,7 @@ LIMIT 30, 10
   |>,<| (왼쪽, 오른쪽)값이 더 큼|
   |>=, <=| (왼쪽, 오른쪽) 값이 같거나 더 큼|
 
-  ~~~Ini
+  ~~~sql
   SELECT 'A' = 'A', 'A' = 'B', 'A' < 'B', 'A' > 'B';
   ~~~
   문자열에서는 인덱스를 기준으로 크다고 표현한
@@ -167,7 +168,7 @@ LIMIT 30, 10
 
 
 
-  ~~~Ini
+  ~~~sql
   SELECT * FROM OrderDetails
   WHERE ProductID BETWEEN 1 AND 4;
   ~~~
@@ -180,7 +181,7 @@ LIMIT 30, 10
   |NOT IN (...)|괄호 안의 값들 중 없음|
 
 
-  ~~~Ini
+  ~~~sql
   SELECT * FROM Customers
   WHERE City IN ('Torino', 'Paris', 'Portland', 'Madrid') 
   ~~~
@@ -193,12 +194,12 @@ LIMIT 30, 10
   |LIKE '...\_...'| \_갯수만큼의 문자를 가진 패턴| 
   LIKE 연산자는 패턴을 가진 문자열을 찾을때 유용한 연산자
 
-  ~~~Ini
+  ~~~sql
   SELECT * FROM OrderDetails
   WHERE OrderID LIKE '1025_'
   ~~~
   OrderDetails에서 OrderID의 값이 10250번대의 값을 가지는  호출
-  ~~~Ini
+  ~~~sql
   SELECT * FROM Customers
   WHERE City Like '%d'
   ~~~
@@ -231,13 +232,14 @@ LIMIT 30, 10
   |GREATEST|(괄호안에서)가장 큰값|
   |LEAST|(괄호안에서)가장 작은값|
 
-  ~~~Ini
+  ~~~sql
   SELECT
     OrderDetailID, ProductID, Quantity,
     GREATEST(OrderDetailID, ProductID, Quantity),
     LEAST(OrderDetailID, ProductID, Quantity)
   FROM OrderDetails;
   ~~~
+    
   OrderDetails의 (OrderDetailID, ProductID, Quantity)값중 가장 큰것과 작은것을 호출
 
 
@@ -254,7 +256,7 @@ LIMIT 30, 10
     GREATEST와 괄호안의 대상들 사이에서 큰값  
     
     MAX는 열에서 가장 큰값
-  ~~~Ini
+  ~~~sql
   SELECT
     MAX(Quantity),
     MIN(Quantity),
@@ -272,7 +274,7 @@ LIMIT 30, 10
   |---|---|
   |POW(A,B), POWER(A,B)|가장 큰 값|
   |SQRT|제곱근|
-  ~~~Ini
+  ~~~sql
   SELECT Price, POW(Price, 1/2)
   FROM Products
   WHERE SQRT(Price) < 4;
@@ -284,7 +286,7 @@ LIMIT 30, 10
   |함수|의미|
   |---|---|
   |TRUMCATE(N,n)|N을 소숫점 n자리까지 선택|
-  ~~~Ini
+  ~~~sql
   SELECT
     TRUNCATE(1234.5678, 1),
     TRUNCATE(1234.5678, 2),
@@ -297,7 +299,7 @@ LIMIT 30, 10
 
 
 
-  ~~~Ini
+  ~~~sql
   SELECT Price FROM Products
   WHERE TRUNCATE(Price, 0) = 12;
   ~~~
@@ -315,7 +317,7 @@ LIMIT 30, 10
   |UCASE, UPPER| 모두 대문자로|
   |LCASE, LOWER| 모두 소문자로|
 
-  ~~~Ini
+  ~~~sql
   SELECT
     UCASE(CustomerName),
     LCASE(ContactName)
@@ -329,11 +331,11 @@ LIMIT 30, 10
   |CONCAT_WS(S, ... )|괄호 안의 내용을 S로 이어붙임|
 
 
-  ~~~Ini
+  ~~~sql
   SELECT OrderID, CONCAT('O-ID: ', OrderID) FROM Orders;
   ~~~
 
-  ~~~Ini
+  ~~~sql
   SELECT
     FirstName, LastName, CONCAT_WS(' ', FirstName, LastName) AS FullName
   FROM Employees;
@@ -342,7 +344,7 @@ LIMIT 30, 10
 
 
 
-  ~~~Ini
+  ~~~sql
   SELECT OrderID, CONCAT('O-ID: ', OrderID) FROM Orders;
   ~~~
 
@@ -373,7 +375,7 @@ LIMIT 30, 10
   
   
   
-  ~~~Ini
+  ~~~sql
   SELECT
     CONCAT('|', ' HELLO ', '|'),
     CONCAT('|', LTRIM(' HELLO '), '|'),
@@ -389,7 +391,7 @@ LIMIT 30, 10
   |LPAD(S, N, P)|S가 N글자가 될때까지 왼쪽에 P를 이어붙임|
   
   
-  ~~~Ini
+  ~~~sql
   SELECT
     LPAD(SupplierID, 5, 0),
     RPAD(Price, 6, 0)
@@ -402,10 +404,10 @@ LIMIT 30, 10
   |INSTR(S,s)| S증 s의 첫 위치 반환 , 없으면 0|
   |CAST(A, T)| A를 T자료형으로 변환|
 
-  ~~~Ini
+  ~~~sql
   REPLACE(S, A, B)	
   ~~~
-  ~~~Ini
+  ~~~sql
   SELECT
   INSTR('ABCDE', 'ABC'),
   INSTR('ABCDE', 'BCDE'),
@@ -413,7 +415,7 @@ LIMIT 30, 10
   INSTR('ABCDE', 'DE'),
   INSTR('ABCDE', 'F');
   ~~~  
-  ~~~Ini
+  ~~~sql
   SELECT
     '01' = '1',
   CONVERT('01', DECIMAL) = CONVERT('1', DECIMAL);
@@ -433,7 +435,7 @@ LIMIT 30, 10
   |CURRENT_TIMESTAMP, NOW| 현재 시간과 날짜를 반환|
   
     
-  ~~~Ini
+  ~~~sql
   SELECT CURDATE(), CURTIME(), NOW();
   ~~~
 
@@ -442,7 +444,7 @@ LIMIT 30, 10
   |DATE| 문자열에 따라 날짜 생성 |
   |TIME| 문자열에 따라 시간 생성 |
 
-  ~~~Ini
+  ~~~sql
   SELECT * FROM Orders
   WHERE
     OrderDate BETWEEN DATE('1997-1-1') AND DATE('1997-1-31');
@@ -457,12 +459,12 @@ LIMIT 30, 10
   |WEEKDAY| 주어진 DATETIME값의 요일반환 (월요일 : 0)|
   |DAYNAME| 주어진 DATETIME값의 요일명 반환|
   |DAYOFMONTH, DAY| 주어진 DATETIME값의 날짜 반환|
-  ~~~Ini
+  ~~~sql
   SELECT * FROM Orders
   WHERE WEEKDAY(OrderDate) = 0;
   ~~~
   OrderDate값의 요일이 월요일(0)이면 불러온다 
-  ~~~Ini
+  ~~~sql
   SELECT
   OrderDate,
   CONCAT(
@@ -486,7 +488,7 @@ LIMIT 30, 10
   |SECOND| 주어진 DATETIME의 초 반환|
 
 
-  ~~~Ini
+  ~~~sql
   SELECT
     HOUR(NOW()), MINUTE(NOW()), SECOND(NOW());
   ~~~
@@ -496,7 +498,7 @@ LIMIT 30, 10
   |---|---|
   |ADDDATE, DATE_ADD| 시간/날짜 더하기|
   |SUBDATE, DATE_SUB| 시간 날짜 빼기|
-  ~~~Ini
+  ~~~sql
   SELECT 
     ADDDATE('2021-06-20', INTERVAL 1 YEAR),
     ADDDATE('2021-06-20', INTERVAL -2 MONTH),
@@ -519,11 +521,11 @@ LIMIT 30, 10
   |TIME_DIFF| 두 시간/날짜 간 시간차|
   |LAST_DAY| 해당 달의 마지막 날짜|
 
-  ~~~Ini
+  ~~~sql
   SELECT
     TIMEDIFF('2021-06-21 15:20:35', '2021-06-21 16:34:41');
   ~~~
-  ~~~Ini
+  ~~~sql
   SELECT
     OrderDate,
     LAST_DAY(OrderDate),
@@ -540,7 +542,7 @@ LIMIT 30, 10
   |---|---|
   |DATE_FORMAT|시간/날짜를 지정한 형식으로 반환|
 
-  ~~~Ini
+  ~~~sql
   SELECT REPLACE(
     REPLACE(
       DATE_FORMAT(NOW(), '%Y년 %m월 %d일 %p %h시 %i분 %초'),
@@ -558,7 +560,7 @@ LIMIT 30, 10
   |STR_TO_DATE(S, F)|S를 F형식으로 해석하여 시간/날짜 생성|
 
 
-  ~~~Ini
+  ~~~sql
   SELECT
     OrderDate,
     DATEDIFF(
@@ -590,7 +592,7 @@ LIMIT 30, 10
   | IF(조건, T, F) |조건이 참이면 T, 거짓이면 F반환|
   | IFNULL(A, B) | A가 NULL일 시 B 출력|
 
-  ~~~Ini
+  ~~~sql
   SELECT
     Price,
     IF (Price > 30, 'Expensive', 'Cheap'),
@@ -615,7 +617,7 @@ LIMIT 30, 10
   ## GROUP BY
   GROUP BY : 조건에 따라 **집계된** 값을 가져옴
   (엑셀의 카운트 if와 같은 느낌? 확실 ㄴㄴ)
-  ~~~Ini
+  ~~~sql
   
   SELECT CategoryID FROM Products
   GROUP BY CategoryID;
@@ -623,7 +625,7 @@ LIMIT 30, 10
   Products 데이터의 CategoryID 열에 모든 값을 집계해서 CategoryID 그룹으로 묶어서 봄
   
   ### 여러 컬럼을 기준으로 그룹화 가능
-  ~~~Ini
+  ~~~sql
   SELECT 
     Country, City,
     CONCAT_WS(', ', City, Country)
@@ -639,7 +641,7 @@ LIMIT 30, 10
   ## GROUP BY와 Min, Count()와 같은 함수를 같이 사용
   
   
-  ~~~Ini
+  ~~~sql
   SELECT
     CategoryID,
     MAX(Price) AS MaxPrice, 
@@ -655,7 +657,7 @@ LIMIT 30, 10
    소수점 2번째자리까지 표현해서 MedianPrice 열에 불러옴<br/> 
   Price가격의 평균을 구해서 소수점 2번째 자리까지 표현
    
-  ~~~Ini
+  ~~~sql
   SELECT
     Country, COUNT(*)
   FROM Suppliers
@@ -668,7 +670,7 @@ LIMIT 30, 10
   ## HAVING 
   HAVING : 그룹화된 데이터 걸러내기
     
-  ~~~Ini
+  ~~~sql
   SELECT
     COUNT(*) AS Count, OrderDate
   FROM Orders
@@ -683,7 +685,7 @@ LIMIT 30, 10
   GROUP BY 와 달리 집계함수가 사용되지 않습니다.
   GROUP BY 와 달리 정렬하지 않으므로 더 빠릅니다.
   
-  ~~~Ini
+  ~~~sql
   SELECT
     Country,
     COUNT(DISTINCT CITY)
@@ -712,7 +714,29 @@ LIMIT 30, 10
 <details>
 <summary> 서브쿼리  </summary>
 <div markdown="1">
-1. 비상관 
+  1. 비상관 서브쿼리
+ 
+  ~~~sql
+  SELECT * FROM Products
+  WHERE Price < (SELECT AVG(Price) FROM Products);
+  ~~~
+                       
+                     Products 테이블에서 Price 평균값을 구하고 평균값 이상의 값을 전부 가져옴
+                 
+                 
+                 
+                 
+  
+                       
+  
+  2. 상관 서브쿼리
+  
+  
+  
+  
+  
+  
+  
   
   
   

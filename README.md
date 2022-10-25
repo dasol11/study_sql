@@ -693,10 +693,12 @@ LIMIT 30, 10
   GROUP BY Country;
     
   ~~~
+  
   Customers 테이블에서 Country열을 기준으로 집계를 내서 표현하고 CITY가 중복된값은 제거하고 숫자를 세어줌
    
    
   
+    
   </div>
   </details>
   
@@ -714,18 +716,54 @@ LIMIT 30, 10
 <details>
 <summary> 서브쿼리  </summary>
 <div markdown="1">
+  
   1. 비상관 서브쿼리
+  
  
   ~~~sql
-  SELECT * FROM Products
-  WHERE Price < (SELECT AVG(Price) FROM Products);
+  SELECT
+    CategoryID, CategoryName, Description
+  FROM Categories
+  WHERE
+    CategoryID IN
+    (SELECT CategoryID FROM Products
+    WHERE Price > 50);
   ~~~
-                       
-                     Products 테이블에서 Price 평균값을 구하고 평균값 이상의 값을 전부 가져옴
-                 
-                 
-                 
-                 
+  
+  Products 테이블에서 Price가 50이상인 CategoryID를 값을 가져옴(조건부분)<br/> 
+  가져온 값이 CategoryID안에 있으면 Categories 에서 CategoryID, CategoryName, Description 를 가져옴
+  
+  
+  |연산자|의미|
+  |---|---|
+  |~ ALL| 서브쿼리의 모든 결과에 대해 ~하다|
+  |~ ANY| 서브쿼리 하나 이상의 결과에 대해 ~하다|
+  
+  
+  ~~~sql
+  SELECT * FROM Products
+  WHERE Price > ALL (
+    SELECT Price FROM Products
+    WHERE CategoryID = 2
+  );  
+  ~~~
+  
+  Products 테이블에서 CategoryID가 2인 Price의 값을 모두 가져와서<br/> 
+  조건문에 조건보다 크면 Products 테이블의 결과를 가져옴
+  
+  ~~~sql
+  SELECT
+    CategoryID, CategoryName, Description
+  FROM Categories
+  WHERE
+    CategoryID = ANY
+    (SELECT CategoryID FROM Products
+    WHERE Price > 50);
+  ~~~
+  Products테이블에 CategoryID중에서 Price가 50이상인 값을 가져와서 <br/>
+  조건의 중 하나라도 같으면 CategoryID, CategoryName, Description를 출력함
+  
+  
   
                        
   

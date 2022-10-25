@@ -651,7 +651,8 @@ LIMIT 30, 10
     
   ~~~
   Products 테이블을 가져와서 CategoryID로 묶어주고,<br/> 
-  CategoryID랑 카테고리 마다의 Price의 최고값, 최소값, 최소최대를 더하고 2로 나눈 것을 소수점 2번째자리까지 표현해서 MedianPrice 열에 불러옴<br/> 
+  CategoryID랑 카테고리 마다의 Price의 최고값, 최소값, 최소최대를 더하고 2로 나눈 것을 <br/> 
+   소수점 2번째자리까지 표현해서 MedianPrice 열에 불러옴<br/> 
   Price가격의 평균을 구해서 소수점 2번째 자리까지 표현
    
   ~~~Ini
@@ -661,11 +662,39 @@ LIMIT 30, 10
   GROUP BY Country
   WITH ROLLUP;
   ~~~
-  WITH ROLLUP을 추가하면 마지막에 총 몇개인지 테이블에 추가됨,
-  즉, 그룹된 값에 대한 합계를 구해줌
+  WITH ROLLUP을 추가하면 마지막에 총 몇개인지 테이블에 추가됨<br/> 
+  즉, 그룹된 값에 대한 합계를 구해줌<br/> 
   WITH ROLLUP은 ORDER BY와 함께 사용할 수 없음
-
+  ## HAVING 
+  HAVING : 그룹화된 데이터 걸러내기
     
+  ~~~Ini
+  SELECT
+    COUNT(*) AS Count, OrderDate
+  FROM Orders
+  WHERE OrderDate > DATE('1996-12-31')
+  GROUP BY OrderDate
+  HAVING Count > 2;  
+  ~~~~
+  WHERE는 그룹하기 전 데이터, HAVING은 그룹 후 집계에 사용함
+      
+  ## DISTINCT 
+  DISTINCT : 중복된 값들을 제거함
+  GROUP BY 와 달리 집계함수가 사용되지 않습니다.
+  GROUP BY 와 달리 정렬하지 않으므로 더 빠릅니다.
+  
+  ~~~Ini
+  SELECT
+    Country,
+    COUNT(DISTINCT CITY)
+  FROM Customers
+  GROUP BY Country;
+    
+  ~~~
+  Customers 테이블에서 Country열을 기준으로 집계를 내서 표현하고 CITY가 중복된값은 제거하고 숫자를 세어줌
+   
+   
+  
   </div>
   </details>
   

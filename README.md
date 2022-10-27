@@ -781,7 +781,7 @@ LIMIT 30, 10
   FROM Products P;
   ~~~
   
-  메인쿼리( products 테이블에서 해당 데이터를 가져오는데  
+  메인쿼리( products 테이블에서 해당 데이터를 가져옴 )
   서브쿼리( Categories 테이블에서 C의  CategoryID와 P의 CategoryID가 같으면 CategoryName을 CategoryName으로 가져온다 )
   
   ~~~slq
@@ -798,8 +798,8 @@ LIMIT 30, 10
     ) AS CustomersInTheCity
   FROM Suppliers S;
   ~~~
-  CustomersInTheCountry  ==>
-  CustomersInTheCity
+  CustomersInTheCountry   `&rarr;`
+  CustomersInTheCity `&rarr;`
   
   
   

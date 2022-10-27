@@ -798,8 +798,8 @@ LIMIT 30, 10
     ) AS CustomersInTheCity
   FROM Suppliers S;
   ~~~
-  CustomersInTheCountry   `&rarr;`
-  CustomersInTheCity `&rarr;`
+  CustomersInTheCountry   &rarr;
+  CustomersInTheCity &rarr;
   
   
   

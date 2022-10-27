@@ -784,7 +784,7 @@ LIMIT 30, 10
   메인쿼리( products 테이블에서 해당 데이터를 가져옴 )
   서브쿼리( Categories 테이블에서 C의  CategoryID와 P의 CategoryID가 같으면 CategoryName을 CategoryName으로 가져온다 )
   
-  ~~~slq
+  ~~~
   SELECT
     SupplierName, Country, City,
     (
@@ -816,10 +816,41 @@ LIMIT 30, 10
   ~~~
   Categories 테이블을 P와 C의 CategoryID가 같고 P의 Price가 80이상이면 가져옴  
   Products 테이블에서 P와 C의 CategoryID가 같은것 중에서 Price가 가장 높은것을 MaxPrice로 가져옴  
+    
+</div>
+</details>
+  
+
   
   
   
   
+<details>
+<summary> JOIN  </summary>
+<div markdown="1">
+  
+    
+  1. JOIN (INNER JOIN) - 내부조인
+    
+  ~~~slq
+  SELECT * FROM Categories C
+  JOIN Products P 
+    ON C.CategoryID = P.CategoryID; 
+  ~~~
+  P와 C의 CategoryID가 같으면 P의 Products를 C에 붙혀서 불러옴
+    
+    
+    
+    
+  2. LEFT/RIGHT OUTERJOIN  - 외부조인
+    
+    
+    
+    
+    
+    
+    
+
     
   
 </div>

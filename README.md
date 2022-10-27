@@ -652,9 +652,9 @@ LIMIT 30, 10
   GROUP BY CategoryID;  
     
   ~~~
-  Products 테이블을 가져와서 CategoryID로 묶어주고,<br/> 
-  CategoryID랑 카테고리 마다의 Price의 최고값, 최소값, 최소최대를 더하고 2로 나눈 것을 <br/> 
-   소수점 2번째자리까지 표현해서 MedianPrice 열에 불러옴<br/> 
+  Products 테이블을 가져와서 CategoryID로 묶어주고,  
+  CategoryID랑 카테고리 마다의 Price의 최고값, 최소값, 최소최대를 더하고 2로 나눈 것을   
+   소수점 2번째자리까지 표현해서 MedianPrice 열에 불러옴  
   Price가격의 평균을 구해서 소수점 2번째 자리까지 표현
    
   ~~~sql
@@ -664,8 +664,8 @@ LIMIT 30, 10
   GROUP BY Country
   WITH ROLLUP;
   ~~~
-  WITH ROLLUP을 추가하면 마지막에 총 몇개인지 테이블에 추가됨<br/> 
-  즉, 그룹된 값에 대한 합계를 구해줌<br/> 
+  WITH ROLLUP을 추가하면 마지막에 총 몇개인지 테이블에 추가됨  
+  즉, 그룹된 값에 대한 합계를 구해줌   
   WITH ROLLUP은 ORDER BY와 함께 사용할 수 없음
   ## HAVING 
   HAVING : 그룹화된 데이터 걸러내기
@@ -730,7 +730,7 @@ LIMIT 30, 10
     WHERE Price > 50);
   ~~~
   
-  Products 테이블에서 Price가 50이상인 CategoryID를 값을 가져옴(조건부분)<br/> 
+  Products 테이블에서 Price가 50이상인 CategoryID를 값을 가져옴(조건부분)  
   가져온 값이 CategoryID안에 있으면 Categories 에서 CategoryID, CategoryName, Description 를 가져옴
   
   
@@ -748,7 +748,7 @@ LIMIT 30, 10
   );  
   ~~~
   
-  Products 테이블에서 CategoryID가 2인 Price의 값을 모두 가져와서<br/> 
+  Products 테이블에서 CategoryID가 2인 Price의 값을 모두 가져와서  
   조건문에 조건보다 크면 Products 테이블의 결과를 가져옴
   
   ~~~sql
@@ -760,7 +760,7 @@ LIMIT 30, 10
     (SELECT CategoryID FROM Products
     WHERE Price > 50);
   ~~~
-  Products테이블에 CategoryID중에서 Price가 50이상인 값을 가져와서 <br/>
+  Products테이블에 CategoryID중에서 Price가 50이상인 값을 가져와서  
   조건의 중 하나라도 같으면 CategoryID, CategoryName, Description를 출력함
   
   
@@ -769,9 +769,37 @@ LIMIT 30, 10
   
   2. 상관 서브쿼리
   
+  서브쿼리가 본 쿼리와 맞물려 돌아감
   
+  ~~~sql
+  SELECT
+    ProductID, ProductName,
+    (
+      SELECT CategoryName FROM Categories C
+      WHERE C.CategoryID = P.CategoryID
+    ) AS CategoryName
+  FROM Products P;
+  ~~~
   
+  메인쿼리( products 테이블에서 해당 데이터를 가져오는데  
+  서브쿼리( Categories 테이블에서 C의  CategoryID와 P의 CategoryID가 같으면 CategoryName을 CategoryName으로 가져온다 )
   
+  ~~~slq
+  SELECT
+    SupplierName, Country, City,
+    (
+      SELECT COUNT(*) FROM Customers C
+      WHERE C.Country = S.Country
+    ) AS CustomersInTheCountry,
+    (
+      SELECT COUNT(*) FROM Customers C
+      WHERE C.Country = S.Country 
+        AND C.City = S.City
+    ) AS CustomersInTheCity
+  FROM Suppliers S;
+  ~~~
+  CustomersInTheCountry  ==>
+  CustomersInTheCity
   
   
   

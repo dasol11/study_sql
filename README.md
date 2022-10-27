@@ -798,10 +798,24 @@ LIMIT 30, 10
     ) AS CustomersInTheCity
   FROM Suppliers S;
   ~~~
-  CustomersInTheCountry   **&rarr;**
-  CustomersInTheCity **&rarr;**
+  CustomersInTheCountry   &rarr; C와 S의 Country가 같은것을 세어줌  
+  CustomersInTheCity &rarr; C와 S의 Country와 City가 같은 숫자를 세어줌    
   
-  
+  ~~~sql
+  SELECT
+    CategoryID, CategoryName
+     ,(SELECT MAX(P.Price) FROM Products P
+     WHERE P.CategoryID = C.CategoryID
+     ) AS MaxPrice
+  FROM Categories C
+  WHERE EXISTS (
+    SELECT * FROM Products P
+    WHERE P.CategoryID = C.CategoryID
+    AND P.Price > 80
+  );
+  ~~~
+  Categories 테이블을 P와 C의 CategoryID가 같고 P의 Price가 80이상이면 가져옴  
+  Products 테이블에서 P와 C의 CategoryID가 같은것 중에서 Price가 가장 높은것을 MaxPrice로 가져옴  
   
   
   

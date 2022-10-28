@@ -832,7 +832,7 @@ LIMIT 30, 10
     
   1. JOIN (INNER JOIN) - 내부조인
     
-  ~~~slq
+  ~~~sql
   SELECT * FROM Categories C
   JOIN Products P 
     ON C.CategoryID = P.CategoryID; 
@@ -840,6 +840,23 @@ LIMIT 30, 10
   P와 C의 CategoryID가 같으면 P의 Products를 C에 붙혀서 불러옴
     
     
+  ~~~sql
+  SELECT 
+    C.CategoryName, P.ProductName,
+    MIN(O.OrderDate) AS FirstOrder,
+    MAX(O.OrderDate) AS LastOrder,
+    SUM(D.Quantity) AS TotalQuantity
+  FROM Categories C
+  JOIN Products P 
+    ON C.CategoryID = P.CategoryID
+  JOIN OrderDetails D
+    ON P.ProductID = D.ProductID
+  JOIN Orders O
+    ON O.OrderID = D.OrderID
+  GROUP BY C.CategoryID, P.ProductID;
+  ~~~~
+  
+  
     
     
   2. LEFT/RIGHT OUTERJOIN  - 외부조인

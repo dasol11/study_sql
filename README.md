@@ -831,7 +831,9 @@ LIMIT 30, 10
   
     
   1. JOIN (INNER JOIN) - 내부조인
-    
+  
+  - 양쪽 모두에 값이 있는 행(NOT NULL)반환
+  - 쉽게 말해서 JION하는 테이블이 한쪽이라도 값이 없으면 반환하지 않음
   ~~~sql
   SELECT * FROM Categories C
   JOIN Products P 
@@ -860,15 +862,103 @@ LIMIT 30, 10
     
     
   2. LEFT/RIGHT OUTERJOIN  - 외부조인
+    - 반대쪽에 데이터가 있든 없든(NULL), 선택된 방향에 있으면 출력함
     
     
     
+    ~~~slq
+    SELECT
+      E1.EmployeeID, CONCAT_WS(' ', E1.FirstName, E1.LastName) AS Employee,
+      E2.EmployeeID, CONCAT_WS(' ', E2.FirstName, E2.LastName) AS NextEmployee
+    FROM Employees E1
+    LEFT JOIN Employees E2
+    ON E1.EmployeeID + 1 = E2.EmployeeID
+    ORDER BY E1.EmployeeID;
+    ~~~
+    왼쪽을 기준으로 가져와서 오른쪽값이 없는 마지막 9번손님이 NextEmplyee가 없이 출력됨  
+    ~~~slq
+    SELECT
+      E1.EmployeeID, CONCAT_WS(' ', E1.FirstName, E1.LastName) AS Employee,
+      E2.EmployeeID, CONCAT_WS(' ', E2.FirstName, E2.LastName) AS NextEmployee
+    FROM Employees E1
+    RIGHT JOIN Employees E2
+    ON E1.EmployeeID + 1 = E2.EmployeeID
+    ORDER BY E1.EmployeeID;
+    ~~~
+    반면 RIGHT는 오른쪽을 기준으로 하기때문에 NextEmployee가 1번인 녀석이 출력됨  
     
+  3. CROSSJOIN - 교차 조인
+  - ON으로 조건을 붙히지 않고 모든 조합을 반환 (A*B)
+    ~~~sql
+    SELECT
+      E1.LastName, E2.FirstName
+    FROM Employees E1
+    CROSS JOIN Employees E2
+    ORDER BY E1.EmployeeID;
+    ~~~
+    모든 Employees 테이블에 LastName과 E2의 FistName을 조합한 결과를 출력함
+ 
+</div>
+</details>
     
-    
-    
+<details>
+<summary> UNION  </summary>
+<div markdown="1">
+|연산자| 설명 |
+|---|---|
+|UNION| 중복을 제거한 집합|
+|UNION ALL| 중복을 제거하지 않은 집합|
+- JION은 열을 추가해준다
+- UNION은 같은 열제목을 가진 행을 추가해줌
 
-    
+1. 합집합
+
+~~~slq
+SELECT CategoryID AS ID FROM Categories
+WHERE CategoryID > 4
+UNION
+SELECT EmployeeID AS ID FROM Employees
+WHERE EmployeeID % 2 = 0;
+~~~
+UNION 기준으로 위와 아래 조건을 합쳐줌 정렬은 안되서 나옴  
+중복된 것을 제거하여 나왔기 때문에 모두 표현하려면 UNION ALL 사용
+2. 교집합
+~~~sql
+SELECT CategoryID AS ID
+FROM Categories C, Employees E
+WHERE 
+  C.CategoryID > 4
+  AND E.EmployeeID % 2 = 0
+  AND C.CategoryID = E.EmployeeID;
+~~~
+조건(마지막 줄)을 주어서 교집합 출력 가능  
+
+3. 차집합
+
+~~~sql
+SELECT CategoryID AS ID
+FROM Categories
+WHERE 
+  CategoryID > 4
+  AND CategoryID NOT IN (
+    SELECT EmployeeID
+    FROM Employees
+    WHERE EmployeeID % 2 = 0
+  );
+~~~
+
+4. 대칭차집합
+~~~sql
+SELECT ID FROM (
+  SELECT CategoryID AS ID FROM Categories
+  WHERE CategoryID > 4
+  UNION ALL
+  SELECT EmployeeID AS ID FROM Employees
+  WHERE EmployeeID % 2 = 0
+) AS Temp 
+GROUP BY ID HAVING COUNT(*) = 1;
+
+~~~
   
 </div>
 </details>

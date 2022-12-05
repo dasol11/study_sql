@@ -904,10 +904,16 @@ LIMIT 30, 10
 <details>
 <summary> UNION  </summary>
 <div markdown="1">
+
+
 |연산자| 설명 |
 |---|---|
 |UNION| 중복을 제거한 집합|
-|UNION ALL| 중복을 제거하지 않은 집합|
+|UNION ALL| 중복을 제거하지 않은 집합|  
+
+
+
+
 - JION은 열을 추가해준다
 - UNION은 같은 열제목을 가진 행을 추가해줌
 
@@ -959,6 +965,135 @@ SELECT ID FROM (
 GROUP BY ID HAVING COUNT(*) = 1;
 
 ~~~
+</div>
+</details>
+
+
+
+<details>
+<summary> Table  </summary>
+<div markdown="1">
+
+1. 테이블 생성/수정/삭제
+
+CREATE TABLE - 테이블 만들기
+~~~sql
+CREATE TABLE people (
+  person_id INT,
+  person_name VARCHAR(10),
+  age TINYINT,
+  birthday DATE
+);
+~~~
+people이라는 이름의 테이블을 만들고  
+age는 큰수를 안쓰기 때문에 조금 작은 크기의 숫자 자료형 TINYINT 사용
+
+
+  
+    
+
+ALTER TABLE - 테이블 변경
+~~~sql
+-- 테이블명 변경
+ALTER TABLE people RENAME TO  friends,
+-- 컬럼 자료형 변경
+CHANGE COLUMN person_id person_id TINYINT,
+-- 컬럼명 변경
+CHANGE COLUMN person_name person_nickname VARCHAR(10), 
+-- 컬럼 삭제
+DROP COLUMN birthday,
+-- 컬럼 추가
+
+ADD COLUMN is_married TINYINT AFTER age;
+~~~
+people 테이블의 이름을 friends으로 변경  
+
+DROP TABLE - 테이블 삽입
+
+~~~sql
+DROP TABLE friends;
+~~~
+2. INSERT INTO - 데이터 삽입
+
+
+~~~sql
+
+-- 모든 컬럼에 값 넣을 때는 컬럼명들 생략 가능
+INSERT INTO people
+  VALUES (2, '전우치', 18, '2003-05-12');
+
+
+~~~
+~~~sql
+
+
+-- 일부 컬럼에만 값 넣기 가능 (NOT NULL은 생략 불가)
+INSERT INTO people
+  (person_id, person_name, birthday)
+  VALUES (3, '임꺽정', '1995-11-04');
+~~~
+~~~sql
+
+-- 자료형에 맞지 않는 값은 오류 발생
+INSERT INTO people
+  (person_id, person_name, age, birthday)
+  VALUES (1, '임꺽정', '스물여섯', '1995-11-04');
+~~~
+~~~sql
+
+-- 여러 행을 한 번에 입력 가능
+INSERT INTO people
+  (person_id, person_name, age, birthday)
+  VALUES 
+    (4, '존 스미스', 30, '1991-03-01'),
+    (5, '루피 D. 몽키', 15, '2006-12-07'),
+    (6, '황비홍', 24, '1997-10-30');
+~~~
+
+3. 테이블 생성시 제약 넣기
+
+~~~sql
+CREATE TABLE people (
+  person_id INT AUTO_INCREMENT PRIMARY KEY,
+  person_name VARCHAR(10) NOT NULL,
+  nickname VARCHAR(10) UNIQUE NOT NULL,
+  age TINYINT UNSIGNED,
+  is_married TINYINT DEFAULT 0
+);
+
+~~~
+|제약|설명|
+|---|---|
+|AUTO_INCREMENT|새 행 생성시마다 자동으로 1씩 증가|
+|PRIMARY KEY| 중복 입력불가, NULL 불가|
+|UNIQUE| 중복 입력 불가|
+|NOT NULL| NULL 입력불가|
+|UNSIGNED| 양수만 가능|
+|DEFAULT|값 입력이 없을시 기본값|
+
+
+
+
+~~~sql
+
+
+~~~
+~~~sql
+
+
+~~~
+~~~sql
+
+
+~~~
+~~~sql
+
+
+~~~
+
+
+</div>
+</details>
   
 </div>
 </details>

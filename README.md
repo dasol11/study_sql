@@ -1052,6 +1052,15 @@ INSERT INTO people
 
 3. 테이블 생성시 제약 넣기
 
+
+|제약|설명|
+|---|---|
+|AUTO_INCREMENT|새 행 생성시마다 자동으로 1씩 증가|
+|PRIMARY KEY| 중복 입력불가, NULL 불가|
+|UNIQUE| 중복 입력 불가|
+|NOT NULL| NULL 입력불가|
+|UNSIGNED| 양수만 가능|
+|DEFAULT|값 입력이 없을시 기본값|
 ~~~sql
 CREATE TABLE people (
   person_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -1062,30 +1071,38 @@ CREATE TABLE people (
 );
 
 ~~~
-|제약|설명|
-|---|---|
-|AUTO_INCREMENT|새 행 생성시마다 자동으로 1씩 증가|
-|PRIMARY KEY| 중복 입력불가, NULL 불가|
-|UNIQUE| 중복 입력 불가|
-|NOT NULL| NULL 입력불가|
-|UNSIGNED| 양수만 가능|
-|DEFAULT|값 입력이 없을시 기본값|
-
-
+ PRIMARY KET(기본키)
+- 테이블마다 하나만 가능
+- 기본적으로 인덱스 생성 (기본키 행 기준으로 빠른 검색 가능)
+- 보통 AUTO_INCREMENT와 함께 사용
+- 각 행을 고유하게 식별가능 - 테이블마다 하나씩 둘 것
 
 
 ~~~sql
 
-
+INSERT INTO people 
+  (person_name, nickname, age)
+  VALUES ('김철수', '아이언워터', 10);
 ~~~
+
 ~~~sql
 
-
+INSERT INTO people 
+  (person_name, nickname, age)
+  VALUES ('이불가', '임파서블', -2);
 ~~~
+-2가 들어가 있어서 오류 발생
 ~~~sql
 
-
+INSERT INTO people 
+  (person_name, nickname, age, is_married)
+  VALUES ('박쇳물', '아이언워터', NULL, 1);
+  -- nickname에 NULL, '아이언수' 넣어보기
 ~~~
+age가  NULL이고 
+닉네임이 아이언워터로 중복되어 오류 
+
+
 ~~~sql
 
 

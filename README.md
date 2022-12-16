@@ -1114,7 +1114,7 @@ age가  NULL이고
 
 
 1. 숫자 자료형
-정수
+정수  
 |자료형|바이트|SIGNED|UNSIGNED|
 |---|---|---|---|
 |TINYINT|1|-128~127|0~255|
@@ -1167,12 +1167,103 @@ VARCHAR를 쓸 경유 글자수 정보 1byte가 추가적으로 들어가기 때
 
 
 
-
-
   
 </div>
 </details>
 
+<details>
+<summary> 데이터 변경, 삭제  </summary>
+<div markdown="1">
+
+1. DELETE - 주어진 조건의 행 삭제하기
+
+~~~sql
+DELETE FROM businesses
+WHERE status = 'CLS';
+~~~
+businesses 테이블에 status열의 값이  'CLS'인  행을 삭제함
+
+  
+
+
+~~~sql
+DELETE FROM businesses;
+~~~
+
+
+~~~sql
+INSERT INTO businesses (fk_section_id, business_name, status, can_takeout)
+VALUES  (3, '화룡각', 'OPN', 1),
+        (2, '철구분식', 'OPN', 1),
+        (5, '얄코렐라', 'RMD', 1);
+~~~
+위에 코드를 실행시 테이블이 삭제되고,  
+그 후에 값이 추가되는데 여기서 Businesses id는 초기화되는것이 아니라  
+19부터 시작됨 즉 DELETE는 테이블의 값만 삭제함
+
+~~~sql
+
+TRUNCATE businesses;
+
+~~~
+
+~~~sql
+INSERT INTO businesses (fk_section_id, business_name, status, can_takeout)
+VALUES  (3, '화룡각', 'OPN', 1),
+        (2, '철구분식', 'OPN', 1),
+        (5, '얄코렐라', 'RMD', 1);
+~~~
+반면, 위의 코드를 실행시 Businesses id가 1부터 다시 시작됨  
+즉, TRUNCATE는 테이블을 전체 초기화함  
+
+
+2.  UPDATE - 주어진 조건의 행 수정하기
+
+~~~SQL
+UPDATE menus
+SET menu_name = '삼선짜장'
+WHERE menu_id = 12;
+~~~
+12번 항목의 이름을 '삼선짜장'으로 변경함
+
+- 여러 컬럼 수정하기
+~~~SQL
+UPDATE menus
+SET 
+  menu_name = '열정떡볶이',
+  kilocalories = 492.78,
+  price = 5000
+WHERE 
+  fk_business_id = 4
+  AND menu_name = '국물떡볶이';
+~~~
+- 컬럼 데이터 활용하여 수정하기
+
+~~~SQL
+UPDATE menus
+SET price = price + 1000
+WHERE fk_business_id = 8;
+~~~
+
+~~~SQL
+UPDATE menus
+SET menu_name = CONCAT('전통 ', menu_name)
+WHERE fk_business_id IN (
+  SELECT business_id 
+  FROM sections S
+  LEFT JOIN businesses B
+    ON S.section_id = B.fk_section_id 
+  WHERE section_name = '한식'
+);
+~~~
+- 조건문 없이는 모든 행 변경
+~~~SQL
+UPDATE menus
+SET menu_name = '획일화';
+
+~~~
+</div>
+</details>
 
   
 </div>
